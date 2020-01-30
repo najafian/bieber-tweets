@@ -1,4 +1,4 @@
-package org.interview.oauth.twitter;
+package org.interview.twitter;
 
 
 public class TwitterAuthenticationException extends Exception {
