@@ -1,20 +1,23 @@
 package org.interview.twitter.service;
 
 import java.util.List;
+
+import org.interview.twitter.exceptionsimport.TwitterAuthenticationException;
 import org.interview.twitter.model.TwitterRequestDto;
 import org.interview.twitter.model.TwitterResponseDto;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.interview.twitter.service.facade.util.TwitterUtils;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 
 @Service
 public class TwitterFacadeServiceImpl implements TwitterService {
-    private Logger logger = LoggerFactory.getLogger(this.getClass());
+    @Autowired
+    private TwitterUtils twitterUtils;
 
     @Override
-    public boolean retrieveAndSaveToDatabase(TwitterRequestDto twitterRequestDto) {
-        return false;
+    public int retrieveAndSaveToDatabase(TwitterRequestDto twitterRequestDto) throws TwitterAuthenticationException {
+       return twitterUtils.retrievedAndSavedTwitters(twitterRequestDto);
     }
 
     @Override

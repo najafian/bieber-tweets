@@ -1,21 +1,9 @@
-package org.interview.twitter.exceptions;
+package org.interview.twitter.exceptionsimport
 
 
-public class TwitterAuthenticationException extends Exception {
-
-	public TwitterAuthenticationException() {
-		super();
-	}
-	
-	public TwitterAuthenticationException(final String message) {
-		super(message);
-	}
-	
-	public TwitterAuthenticationException(final String message, final Throwable t) {
-		super(message, t);
-	}
-	
-	public TwitterAuthenticationException(final Throwable t) {
-		super(t);
-	}
+class TwitterAuthenticationException : Exception {
+    constructor() : super()
+    constructor(message: String?) : super(message)
+    constructor(message: String?, t: Throwable?) : super(message, t)
+    constructor(t: Throwable?) : super(t)
 }
