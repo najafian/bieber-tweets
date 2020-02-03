@@ -1,6 +1,8 @@
-package org.interview.twitter.exceptionsimport
+package org.interview.twitter.exception
 
-
+/**
+ * @authors Mehdi Najafian
+ */
 class TwitterAuthenticationException : Exception {
     constructor() : super()
     constructor(message: String?) : super(message)

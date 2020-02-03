@@ -3,9 +3,11 @@ package org.interview.twitter.configuration
 import com.google.api.client.auth.oauth.*
 import com.google.api.client.http.HttpTransport
 import com.google.api.client.http.javanet.NetHttpTransport
+import org.springframework.beans.factory.config.ConfigurableBeanFactory
 import org.springframework.boot.context.properties.EnableConfigurationProperties
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
+import org.springframework.context.annotation.Scope
 import org.springframework.web.client.RestTemplate
 import java.text.SimpleDateFormat
 import java.util.*
@@ -18,45 +20,31 @@ import java.util.*
 @Configuration
 @EnableConfigurationProperties
 class TwitterConfiguration {
-    @Bean
-    fun oAuthHmacSigner(): OAuthHmacSigner {
-        return OAuthHmacSigner()
-    }
 
     @Bean
-    fun oAuthAuthorizeTemporaryTokenUrl(): OAuthAuthorizeTemporaryTokenUrl {
-        return OAuthAuthorizeTemporaryTokenUrl(AUTHORIZE_URL)
-    }
+    @Scope(value = ConfigurableBeanFactory.SCOPE_PROTOTYPE)
+    fun requestTokenResponse() = OAuthCredentialsResponse()
 
     @Bean
-    fun oAuthGetTemporaryToken(): OAuthGetTemporaryToken {
-        return OAuthGetTemporaryToken(REQUEST_TOKEN_URL)
-    }
+    fun oAuthAuthorizeTemporaryTokenUrl() = OAuthAuthorizeTemporaryTokenUrl(AUTHORIZE_URL)
 
     @Bean
-    fun oAuthGetAccessToken(): OAuthGetAccessToken {
-        return OAuthGetAccessToken(ACCESS_TOKEN_URL)
-    }
+    fun oAuthGetTemporaryToken() = OAuthGetTemporaryToken(REQUEST_TOKEN_URL)
 
     @Bean
-    fun httpTransport(): HttpTransport {
-        return NetHttpTransport()
-    }
+    fun oAuthGetAccessToken() = OAuthGetAccessToken(ACCESS_TOKEN_URL)
 
     @Bean
-    fun oAuthParameters(): OAuthParameters {
-        return OAuthParameters()
-    }
+    fun httpTransport() = NetHttpTransport()
 
     @Bean
-    fun restTemplate(): RestTemplate {
-        return RestTemplate()
-    }
+    fun oAuthParameters() = OAuthParameters()
 
     @Bean
-    fun simpleDateFormat(): SimpleDateFormat {
-        return SimpleDateFormat(DATE_PATTERN, Locale.ENGLISH)
-    }
+    fun restTemplate() = RestTemplate()
+
+    @Bean
+    fun simpleDateFormat() = SimpleDateFormat(DATE_PATTERN, Locale.ENGLISH)
 
     companion object {
         const val AUTHORIZE_URL = "https://api.twitter.com/oauth/authorize"

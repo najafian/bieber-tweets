@@ -4,11 +4,11 @@ import javax.persistence.*
 import java.util.Date
 
 /**
- * @Author Mehdi
+ * @authors Mehdi Najafian
  */
 @Entity
 @Table(name = "Author")
-class Author {
+class Author : Comparable<Author> {
     @Id
     @Column(name = "USER_ID")
     var userId: Long? = null
@@ -27,6 +27,13 @@ class Author {
 
     override fun toString(): String {
         return "Author(userId=$userId, creationDate=$creationDate, name=$name, screenName=$screenName, twitterMessage=$twitterMessage)"
+    }
+
+    override fun compareTo(other: Author): Int {
+        var result = 0
+        if (other !== this)
+            result = this.creationDate!!.compareTo(other.creationDate)
+        return result
     }
 
 }

@@ -1,19 +1,14 @@
 package org.interview.twitter.model
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties
-import com.fasterxml.jackson.annotation.JsonProperty
-
+import java.util.*
 import javax.persistence.*
-import java.io.Serializable
-import java.util.Date
-import kotlin.jvm.Transient
 
 /**
- * @Author Mehdi
+ * @authors Mehdi Najafian
  */
 @Entity
 @Table(name = "MESSAGE")
-class TwitterMessage {
+class TwitterMessage : Comparable<TwitterMessage> {
     @Id
     @Column(name = "MESSAGE_ID")
     var messageId: Long? = null
@@ -36,5 +31,12 @@ class TwitterMessage {
 
     override fun toString(): String {
         return "TwitterMessage(messageId=$messageId, creationDate=$creationDate, messageText=$messageText, author=$author)"
+    }
+
+    override fun compareTo(other: TwitterMessage): Int {
+        var result = 0;
+        if (other !== this)
+            return this.creationDate!!.compareTo(other.creationDate)
+        return result;
     }
 }

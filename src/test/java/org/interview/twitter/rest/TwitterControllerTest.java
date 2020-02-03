@@ -1,8 +1,12 @@
 package org.interview.twitter.rest;
 
+import org.interview.twitter.exception.TwitterAuthenticationException;
 import org.interview.twitter.model.TwitterRequestDto;
+import org.interview.twitter.service.facade.TwitterAuthenticatorUtils;
+import org.junit.Ignore;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
 import org.slf4j.Logger;
@@ -26,8 +30,8 @@ import static org.springframework.test.util.AssertionErrors.assertTrue;
 class TwitterControllerTest {
     private Logger logger = LoggerFactory.getLogger(this.getClass());
     private TwitterRequestDto twitterRequestDto;
+    private HttpHeaders headers;
     private URI uri;
-    HttpEntity entity;
     @Value("${twitter.keys.consumerKey}")
     private String consumerKey;
 
@@ -37,11 +41,20 @@ class TwitterControllerTest {
     @Value("${twitter.keys.appName}")
     private String appName;
 
-    @Autowired
     private RestTemplate restTemplate;
+    private TwitterAuthenticatorUtils twitterAuthenticatorUtils;
+
+    @Autowired
+    public TwitterControllerTest(RestTemplate restTemplate,
+                                 TwitterAuthenticatorUtils twitterAuthenticatorUtils) {
+        this.restTemplate = restTemplate;
+        this.twitterAuthenticatorUtils = twitterAuthenticatorUtils;
+    }
 
     @BeforeEach
     void setUp() {
+        headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_JSON);
         final String baseUrl = "http://localhost:8080/api/";
         try {
             uri = new URI(baseUrl);
@@ -55,14 +68,38 @@ class TwitterControllerTest {
     void tearDown() {
     }
 
+
     @Test
-    void retrieveListFromTwitterAndSave() {
-        HttpHeaders headers = new HttpHeaders();
-        headers.setContentType(MediaType.APPLICATION_JSON);
+    @DisplayName("Generate URI for PinID Method")
+    void testGeneratePinUriFromKeys() {
+        StringBuilder params = new StringBuilder()
+                .append(uri.toString())
+                .append("GenerateUrl")
+                .append("?consumerKey=")
+                .append(consumerKey)
+                .append("&consumerSecretKey=")
+                .append(consumerSecret);
+
+        ResponseEntity<String> responseEntity = this.restTemplate.exchange(
+                uri.resolve(params.toString()),
+                HttpMethod.GET,
+                new HttpEntity<>(headers),
+                String.class);
+        String body = responseEntity.getBody();
+        assertNotEquals("Number of tweet is not equal to -1", -1, body);
+    }
+
+    /**
+     * It is not possible with 2 level Authentication in Twitter website to test with JUnit
+     *
+     * Only We should test it via Client-Side
+     */
+    @Test
+    void testRetrieveListFromTwitterAndSave() throws TwitterAuthenticationException {
         HttpEntity<?> httpEntity = new HttpEntity<Object>(twitterRequestDto, headers);
         ResponseEntity<Integer> responseEntity = this.restTemplate.exchange(
                 uri,
-                HttpMethod.POST,
+                HttpMethod.PUT,
                 httpEntity,
                 Integer.class);
         Integer numberOfBieberTweets = responseEntity.getBody();
@@ -70,13 +107,15 @@ class TwitterControllerTest {
         assertNotEquals("Number of tweet is not equal to -1", -1, numberOfBieberTweets);
     }
 
+
     @Test
     void getAllPreservedTwitters() {
-        HttpHeaders headers = new HttpHeaders();
-        entity = new HttpEntity(headers);
         ResponseEntity<List> listResponseEntity = restTemplate.exchange(
-                uri, HttpMethod.GET, entity, List.class);
+                uri,
+                HttpMethod.GET,
+                new HttpEntity(headers),
+                List.class);
         logger.info("Number of twitters retrieved from Database: \n" + listResponseEntity.getBody());
-        assertTrue("There are Some twitter messages in Database", listResponseEntity.getBody().size() > 0);
+        assertTrue("There are Some twitter messages in Database", listResponseEntity.getBody()!=null);
     }
 }

@@ -6,9 +6,7 @@ import com.fasterxml.jackson.annotation.JsonProperty
 import java.util.Date
 
 /**
- * Serialize class for the Author's data.
- *
- * @author bleck84
+ * @authors Mehdi Najafian
  */
 @JsonIgnoreProperties(ignoreUnknown = true)
 data class AuthorMapper(@JsonProperty("id") val userId: String?,

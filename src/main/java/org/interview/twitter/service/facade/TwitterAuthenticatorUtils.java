@@ -9,30 +9,27 @@
  * *
  * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
  */
-package org.interview.twitter.service.facade.util;
+package org.interview.twitter.service.facade;
 
 import com.google.api.client.auth.oauth.*;
 import com.google.api.client.http.HttpRequestFactory;
 import com.google.api.client.http.HttpTransport;
-import org.interview.twitter.exceptionsimport.TwitterAuthenticationException;
+import org.interview.twitter.exception.TwitterAuthenticationException;
+import org.interview.twitter.model.TwitterRequestDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.io.BufferedReader;
 import java.io.IOException;
-import java.util.Scanner;
+import java.io.InputStreamReader;
 
 /**
  * Provide access to the Twitter API by implementing the required OAuth flow
  *
- * @authors Carlo Sciolla, Mehdi
+ * @authors Carlo Sciolla, Mehdi Najafian
  */
 @Service
 public class TwitterAuthenticatorUtils {
-
-    private String consumerKey;
-    private String consumerSecret;
-    private String providedPin;
-
     private HttpTransport TRANSPORT;
     private OAuthGetAccessToken accessToken;
     private OAuthHmacSigner oAuthHmacSigner;
@@ -40,36 +37,35 @@ public class TwitterAuthenticatorUtils {
     private OAuthGetTemporaryToken requestToken;
     private OAuthParameters parameters;
     private HttpRequestFactory factory;
+    private OAuthCredentialsResponse requestTokenResponse;
 
     @Autowired
     public TwitterAuthenticatorUtils(HttpTransport TRANSPORT,
                                      OAuthGetAccessToken accessToken,
-                                     OAuthHmacSigner oAuthHmacSigner,
                                      OAuthAuthorizeTemporaryTokenUrl authorizeUrl,
                                      OAuthGetTemporaryToken requestToken,
-                                     OAuthParameters parameters) {
+                                     OAuthParameters parameters,
+                                     OAuthCredentialsResponse requestTokenResponse) {
         this.TRANSPORT = TRANSPORT;
         this.accessToken = accessToken;
-        this.oAuthHmacSigner = oAuthHmacSigner;
         this.authorizeUrl = authorizeUrl;
         this.requestToken = requestToken;
         this.parameters = parameters;
+        this.requestTokenResponse = requestTokenResponse;
     }
+
 
     /**
      * Create a new TwitterAuthenticator
      *
-     * @param consumerKey    The OAuth consumer key
-     * @param consumerSecret The OAuth consumer secret
+     * @param twitterRequestDto
+     * @throws TwitterAuthenticationException
      */
-    public HttpRequestFactory getAuthenticationInfo(String consumerKey,
-                                                    String consumerSecret,
-                                                    String providedPin
-    ) throws TwitterAuthenticationException {
-        this.consumerKey = consumerKey;
-        this.consumerSecret = consumerSecret;
-        this.providedPin = providedPin;
-        return getAuthorizedHttpRequestFactory();
+    public void retrieveAuthenticationPinID(TwitterRequestDto twitterRequestDto)
+            throws TwitterAuthenticationException {
+        String AuthorizedUri = makeUriFromKeys(twitterRequestDto.getConsumerKey(), twitterRequestDto.getConsumerSecurityKey());
+        String generatedPinID = twitterRequestDto.getPinID()==null? retrievePin(AuthorizedUri):twitterRequestDto.getPinID();
+        twitterRequestDto.setPinID(generatedPinID);
     }
 
     /**
@@ -77,11 +73,11 @@ public class TwitterAuthenticatorUtils {
      *
      * @return The authenticated HTTP request factory
      */
-    public synchronized HttpRequestFactory getAuthorizedHttpRequestFactory() throws TwitterAuthenticationException {
+    public synchronized HttpRequestFactory getAuthorizedHttpRequestFactory(TwitterRequestDto twitterRequestDto) throws TwitterAuthenticationException {
         if (factory != null) {
             return factory;
         }
-        factory = createRequestFactory();
+        factory = createRequestFactory(twitterRequestDto);
         return factory;
     }
 
@@ -91,21 +87,23 @@ public class TwitterAuthenticatorUtils {
      *
      * @return The authenticated HTTP request factory
      */
-    private HttpRequestFactory createRequestFactory() throws TwitterAuthenticationException {
-        oAuthHmacSigner.clientSharedSecret = consumerSecret;
-        OAuthCredentialsResponse requestTokenResponse = getTemporaryToken(oAuthHmacSigner);
-        oAuthHmacSigner.tokenSharedSecret = requestTokenResponse.tokenSecret;
-        authorizeUrl.temporaryToken = requestTokenResponse.token;
-        retrievePin(authorizeUrl);
-
-        OAuthCredentialsResponse accessTokenResponse = retrieveAccessTokens(providedPin, oAuthHmacSigner, requestTokenResponse.token);
+    private HttpRequestFactory createRequestFactory(TwitterRequestDto twitterRequestDto) throws TwitterAuthenticationException {
+        OAuthCredentialsResponse accessTokenResponse = retrieveAccessTokens(twitterRequestDto, oAuthHmacSigner, requestTokenResponse.token);
         oAuthHmacSigner.tokenSharedSecret = accessTokenResponse.tokenSecret;
-
-        parameters.consumerKey = consumerKey;
+        parameters.consumerKey = twitterRequestDto.getConsumerKey();
         parameters.token = accessTokenResponse.token;
         parameters.signer = oAuthHmacSigner;
-
         return TRANSPORT.createRequestFactory(parameters);
+    }
+
+
+    public String makeUriFromKeys(String consumerKey, String consumerSecretKey) throws TwitterAuthenticationException {
+        oAuthHmacSigner = new OAuthHmacSigner();
+        oAuthHmacSigner.clientSharedSecret = consumerSecretKey;
+        requestTokenResponse = getTemporaryToken(oAuthHmacSigner, consumerKey);
+        oAuthHmacSigner.tokenSharedSecret = requestTokenResponse.tokenSecret;
+        authorizeUrl.temporaryToken = requestTokenResponse.token;
+        return authorizeUrl.build();
     }
 
     /**
@@ -114,7 +112,7 @@ public class TwitterAuthenticatorUtils {
      * @param signer The HMAC signer used to cryptographically sign requests to Twitter
      * @return The response containing the temporary tokens
      */
-    private OAuthCredentialsResponse getTemporaryToken(final OAuthHmacSigner signer) throws TwitterAuthenticationException {
+    private OAuthCredentialsResponse getTemporaryToken(final OAuthHmacSigner signer, String consumerKey) throws TwitterAuthenticationException {
 
         requestToken.consumerKey = consumerKey;
         requestToken.transport = TRANSPORT;
@@ -130,35 +128,42 @@ public class TwitterAuthenticatorUtils {
     }
 
     /**
+     * This method is only for test in JUnit
      * Guide the user to obtain a PIN from twitter to authorize the requests
      *
      * @param authorizeUrl The URL embedding the temporary tokens to be used to request the PIN
      * @return The PIN as it is entered by the user after following the Twitter OAuth wizard
      */
-    private void retrievePin(final OAuthAuthorizeTemporaryTokenUrl authorizeUrl) throws TwitterAuthenticationException {
-        if (providedPin == null)
-            try (Scanner scanner = new Scanner(System.in)) {
-                System.out.println("Go to the following link in your browser:\n" + authorizeUrl.build());
-                System.out.println("\nPlease enter the retrieved PIN:");
-                providedPin = scanner.nextLine();
-            }
+    private String retrievePin(final String authorizeUrl) throws TwitterAuthenticationException {
+        String providedPin = null;
+        try (BufferedReader b = new BufferedReader(new InputStreamReader(System.in))) {
+            System.out.println("Go to the following link in your browser:\n" + authorizeUrl);
+            System.out.println("\nPlease enter the retrieved PIN:");
+            providedPin = b.readLine();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
         if (providedPin == null) {
             throw new TwitterAuthenticationException("Unable to read entered PIN");
         }
+        return providedPin;
     }
-
 
     /**
      * Exchange the temporary token and the PIN for an access token that can be used to invoke Twitter APIs
      *
-     * @param providedPin The PIN that the user obtained when following the Twitter OAuth wizard
-     * @param signer      The HMAC signer used to cryptographically sign requests to Twitter
-     * @param token       The temporary token to be exchanged for the access token
+     * @param twitterRequestDto
+     * @param signer            The HMAC signer used to cryptographically sign requests to Twitter
+     * @param token             The temporary token to be exchanged for the access token
      * @return The access token that can be used to invoke Twitter APIs
+     * @throws TwitterAuthenticationException
      */
-    private OAuthCredentialsResponse retrieveAccessTokens(final String providedPin, final OAuthHmacSigner signer, final String token) throws TwitterAuthenticationException {
-        accessToken.verifier = providedPin;
-        accessToken.consumerKey = consumerSecret;
+    private OAuthCredentialsResponse retrieveAccessTokens(TwitterRequestDto twitterRequestDto,
+                                                          final OAuthHmacSigner signer,
+                                                          final String token) throws TwitterAuthenticationException {
+        accessToken.verifier = twitterRequestDto.getPinID();
+        accessToken.consumerKey = twitterRequestDto.getConsumerKey();
         accessToken.signer = signer;
         accessToken.transport = TRANSPORT;
         accessToken.temporaryToken = token;
@@ -172,4 +177,5 @@ public class TwitterAuthenticatorUtils {
 
         return accessTokenResponse;
     }
+
 }
