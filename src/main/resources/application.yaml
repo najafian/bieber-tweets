@@ -1,0 +1,32 @@
+twitter:
+  keys:
+    appName: 'java-exercise'
+    consumerKey: 'RLSrphihyR4G2UxvA0XBkLAdl'
+    consumerSecret: 'FTz2KcP1y3pcLw0XXMX5Jy3GTobqUweITIFy4QefullmpPnKm4'
+    accessToken: ''
+    accessTokenSecret: ''
+server:
+  port: 8080
+spring:
+  datasource:
+    driver-class-name: org.h2.Driver
+    url: jdbc:h2:mem:SYTEC;MODE=ORACLE
+    username: sa
+    jpa:
+      show-sql: true
+      hibernate:
+        ddl-auto: none
+        properties:
+          hibernate:
+            format_sql: true
+    h2:
+      console:
+        enabled: true
+  application:
+    name: sytac.io
+  jpa:
+    hibernate:
+      ddl-auto: none
+logging:
+  file:
+    path: logFolder
