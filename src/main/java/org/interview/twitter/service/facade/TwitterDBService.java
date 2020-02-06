@@ -5,6 +5,7 @@ import org.interview.twitter.model.AuthorMapper;
 import org.interview.twitter.model.TweetMapper;
 import org.interview.twitter.model.TwitterMessage;
 import org.interview.twitter.repository.TwitterMessageRepository;
+import org.jetbrains.annotations.NotNull;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,7 +28,8 @@ public class TwitterDBService {
 
     @Transactional
     @Modifying
-    public boolean saveTwitterMessage(List<TweetMapper> tweetMapper) {
+    public boolean saveTwitterMessage(@NotNull List<TweetMapper> tweetMapper) {
+        try{
         tweetMapper.stream()
                 .sorted(TweetMapper::compareTo)
                 .forEach(item -> {
@@ -39,6 +41,9 @@ public class TwitterDBService {
             logger.info(twitterMessage.toString());
             twitterMessageRepository.save(twitterMessage);
         });
+        }catch (Exception e){
+            System.out.println(e.getMessage());
+        }
         return true;
     }
 
