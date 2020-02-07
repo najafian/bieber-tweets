@@ -12,8 +12,8 @@ export const ACTION_TYPES = {
 
 const initialState = {
     twitterApiUrl: '',
-    twitterApiGetAndSave: {},
-    twitterApiGetResult: {}
+    twitterApiGetAndSave: [],
+    twitterApiGetResultFromDB: []
 };
 
 export type TwitterApiReducerType = Readonly<typeof initialState>;
@@ -41,7 +41,7 @@ export default (state: TwitterApiReducerType = initialState, action: any): Twitt
         case SUCCESS(ACTION_TYPES.TWITTER_RESULT):
             return {
                 ...state,
-                twitterApiGetResult: action.payload.data
+                twitterApiGetResultFromDB: action.payload.data
             };
         case SUCCESS(ACTION_TYPES.TWITTER_SAVE):
             return {
@@ -60,7 +60,7 @@ export const loadPinIDFromTwitterUri: IPayloadResult<any> = (entity: IParamInput
 });
 
 export const getResultFromTwitter: IPayloadResult<any> = (entity: any) => ({
-    type: ACTION_TYPES.TWITTER_RESULT,
+    type: ACTION_TYPES.TWITTER_SAVE,
     payload: axios.put('/api', entity)
 });
 

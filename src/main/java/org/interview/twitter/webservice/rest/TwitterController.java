@@ -7,6 +7,7 @@ import org.interview.twitter.service.TwitterService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
+
 import java.util.List;
 
 /**
@@ -15,7 +16,6 @@ import java.util.List;
 @RestController
 @RequestMapping(value = "/api")
 public class TwitterController {
-
 
     @Autowired
     private TwitterService twitterService;

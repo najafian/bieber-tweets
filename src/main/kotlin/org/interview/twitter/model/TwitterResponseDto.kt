@@ -9,10 +9,12 @@ import java.util.Date
  *
  * @Author Mehdi
  */
-data class TwitterResponseDto(@JsonProperty("user") var twitterUser: String?,
+data class TwitterResponseDto(@JsonProperty("userID") var userID: Long?,
+                              @JsonProperty("user") var twitterUser: String?,
                               @JsonProperty("userDate") var userCreationDate: Date?,
                               @JsonProperty("screenName") var userScreenName: String?,
+                              @JsonProperty("twitterTextID") var twitterTextID: Long?,
                               @JsonProperty("text") var twitterText: String?,
                               @JsonProperty("twitterDate") var twitterCreationDate: Date?) {
-    constructor():this("",Date(),"","",Date())
+    constructor() : this(null,null, null, null, null,null,null)
 }

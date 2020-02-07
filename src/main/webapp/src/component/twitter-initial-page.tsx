@@ -9,7 +9,7 @@ import {loadPinIDFromTwitterUri, getResultFromTwitter, getResultFromDB} from "./
 interface ICardInstituteProps extends StateProps, DispatchProps, RouteComponentProps<{}> {
 }
 
-class TwitterAuthPage extends React.Component<ICardInstituteProps> {
+class TwitterInitialPage extends React.Component<ICardInstituteProps> {
     private appName: TextBox = new TextBox();
     private consumeKey: TextBox = new TextBox();
     private consumeSecurityKey: TextBox = new TextBox();
@@ -30,6 +30,17 @@ class TwitterAuthPage extends React.Component<ICardInstituteProps> {
     componentDidUpdate(prevProps: Readonly<ICardInstituteProps>, prevState: Readonly<{}>, snapshot?: any): void {
         if (this.props.twitterApiReducer.twitterApiUrl !== prevProps.twitterApiReducer.twitterApiUrl) {
             window.open(this.props.twitterApiReducer.twitterApiUrl);
+        }
+        let twitterApiGetAndSave = this.props.twitterApiReducer.twitterApiGetAndSave;
+        if (twitterApiGetAndSave !== prevProps.twitterApiReducer.twitterApiGetAndSave) {
+            let resultTweets = JSON.stringify(twitterApiGetAndSave);
+            console.log(resultTweets);
+            console.log(twitterApiGetAndSave.length);
+        }
+        let twitterApiGetResultFromDB = this.props.twitterApiReducer.twitterApiGetResultFromDB;
+        if (twitterApiGetResultFromDB !== prevProps.twitterApiReducer.twitterApiGetResultFromDB) {
+            console.log(twitterApiGetResultFromDB);
+            this.props.history.push('/result-page', {result: twitterApiGetResultFromDB});
         }
     }
 
@@ -55,6 +66,7 @@ class TwitterAuthPage extends React.Component<ICardInstituteProps> {
     }
 
     private showResult() {
+        this.props.history.push('/main-rps-game');
         this.showResultBtn.element.addEventListener('click', () => {
             this.props.getResultFromDB();
         });
@@ -146,4 +158,4 @@ type DispatchProps = typeof mapDispatchToProps;
 export default connect(
     mapStateToProps,
     mapDispatchToProps
-)(TwitterAuthPage);
+)(TwitterInitialPage);

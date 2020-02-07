@@ -9,7 +9,7 @@ import * as serviceWorker from './serviceWorker';
 import initialize from "./shared/reducer/store";
 import {Route, Router, Switch} from "react-router";
 import {createBrowserHistory} from 'history'
-import TwitterAuthPage from './component/twitter-auth-page'
+import TwitterAuthPage from './component/twitter-initial-page'
 import TwitterResultPage from './component/twitter-result-page'
 
 
@@ -22,7 +22,7 @@ ReactDOM.render(
                 <div className="center-form-class">
                     <Router history={createBrowserHistory()}>
                         <Switch>
-                            <Route path="/main-rps-game" component={TwitterResultPage}/>
+                            <Route path="/result-page" component={TwitterResultPage}/>
                             <Route component={TwitterAuthPage} path="/"/>
                         </Switch>
                     </Router>
