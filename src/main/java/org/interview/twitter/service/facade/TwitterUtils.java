@@ -38,7 +38,9 @@ public class TwitterUtils {
 
 
     @Autowired
-    public TwitterUtils(TwitterAuthenticatorUtils twitterAuthenticatorUtils, TwitterDBService messageService, SimpleDateFormat simpleDateFormat, TwitterMessageRepository twitterMessageRepository) {
+    public TwitterUtils(TwitterAuthenticatorUtils twitterAuthenticatorUtils,
+                        TwitterDBService messageService,
+                        SimpleDateFormat simpleDateFormat) {
         this.twitterAuthenticatorUtils = twitterAuthenticatorUtils;
         this.twitterDBService = messageService;
         this.simpleDateFormat = simpleDateFormat;
@@ -71,9 +73,12 @@ public class TwitterUtils {
                 .parallelStream()
                 .sorted(Comparator.comparing(TwitterMessage::getAuthor))
                 .sorted(TwitterMessage::compareTo)
-                .map(m -> new TwitterResponseDto(m.getAuthor().getName(),
+                .map(m -> new TwitterResponseDto(
+                        m.getAuthor().getUserId(),
+                        m.getAuthor().getName(),
                         m.getAuthor().getCreationDate(),
                         m.getAuthor().getScreenName(),
+                        m.getMessageId(),
                         m.getMessageText(),
                         m.getCreationDate()))
                 .collect(Collectors.toList());
@@ -82,19 +87,19 @@ public class TwitterUtils {
 
     private int getStreamAndSaveMessagesIntoDB(HttpRequestFactory httpRequestFactory, String keywordSearch) {
         try {
-            StringBuilder builder = new StringBuilder()
-                    .append("https://stream.twitter.com/1.1/statuses/filter.json?")
-                    .append("track=")
-                    .append(keywordSearch);
+            StringBuilder builder = new StringBuilder();
+            builder.append("https://stream.twitter.com/1.1/statuses/filter.json?");
+            builder.append("track=");
+            builder.append(keywordSearch);
             BufferedReader reader = getTwitterStream(httpRequestFactory, builder.toString());
-            return saveIntoDatabase(reader);
+            return saveTweetsIntoDatabase(reader);
         } catch (IOException e) {
             e.printStackTrace();
         }
         return -1;
     }
 
-    private int saveIntoDatabase(BufferedReader reader) throws IOException {
+    private int saveTweetsIntoDatabase(BufferedReader reader) throws IOException {
         long startTime = System.currentTimeMillis();
         List<TweetMapper> mapperSet = new ArrayList<>();
         ObjectMapper mapper = new ObjectMapper();

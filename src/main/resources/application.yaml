@@ -6,8 +6,11 @@ twitter:
     accessToken: ''
     accessTokenSecret: ''
 server:
-  port: 8080
+  port: 8088
 spring:
+  profiles:
+    include:
+      - swagger
   datasource:
     driver-class-name: org.h2.Driver
     url: jdbc:h2:mem:SYTEC;MODE=ORACLE

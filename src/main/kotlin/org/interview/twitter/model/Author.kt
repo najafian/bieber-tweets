@@ -9,6 +9,17 @@ import java.util.Date
 @Entity
 @Table(name = "Author")
 class Author : Comparable<Author> {
+    //this constructor is for Jpa
+    constructor()
+
+    constructor(userId: Long?, creationDate: Date?, name: String?, screenName: String?, twitterMessage: TwitterMessage?) {
+        this.userId = userId
+        this.creationDate = creationDate
+        this.name = name
+        this.screenName = screenName
+        this.twitterMessage = twitterMessage
+    }
+
     @Id
     @Column(name = "USER_ID")
     var userId: Long? = null
@@ -24,10 +35,6 @@ class Author : Comparable<Author> {
 
     @OneToOne(mappedBy = "author")
     var twitterMessage: TwitterMessage? = null
-
-    override fun toString(): String {
-        return "Author(userId=$userId, creationDate=$creationDate, name=$name, screenName=$screenName, twitterMessage=$twitterMessage)"
-    }
 
     override fun compareTo(other: Author): Int {
         var result = 0

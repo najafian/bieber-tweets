@@ -5,6 +5,7 @@ import org.interview.twitter.model.AuthorMapper;
 import org.interview.twitter.model.TweetMapper;
 import org.interview.twitter.model.TwitterMessage;
 import org.interview.twitter.repository.TwitterMessageRepository;
+import org.jetbrains.annotations.NotNull;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,18 +28,22 @@ public class TwitterDBService {
 
     @Transactional
     @Modifying
-    public boolean saveTwitterMessage(List<TweetMapper> tweetMapper) {
-        tweetMapper.stream()
-                .sorted(TweetMapper::compareTo)
-                .forEach(item -> {
-            TwitterMessage twitterMessage = new TwitterMessage();
-            twitterMessage.setMessageId(Long.valueOf(item.getMessageId()));
-            twitterMessage.setCreationDate(item.getCreationDate());
-            twitterMessage.setMessageText(item.getMessageText());
-            twitterMessage.setAuthor(convertAuthorMapper(item.getAuthor()));
-            logger.info(twitterMessage.toString());
-            twitterMessageRepository.save(twitterMessage);
-        });
+    public boolean saveTwitterMessage(@NotNull List<TweetMapper> tweetMapper) {
+        try {
+            tweetMapper.stream()
+                    .sorted(TweetMapper::compareTo)
+                    .forEach(item -> {
+                        TwitterMessage twitterMessage = new TwitterMessage();
+                        twitterMessage.setMessageId(Long.valueOf(item.getMessageId()));
+                        twitterMessage.setCreationDate(item.getCreationDate());
+                        twitterMessage.setMessageText(item.getMessageText());
+                        twitterMessage.setAuthor(convertAuthorMapper(item.getAuthor()));
+                        logger.info(twitterMessage.toString());
+                        twitterMessageRepository.save(twitterMessage);
+                    });
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
         return true;
     }
 

@@ -3881,3 +3881,8 @@ org.h2.jdbc.JdbcSQLNonTransientConnectionException: The database is open in excl
 03-02-2020 22:47:55.575 [SpringContextShutdownHook] [sytac.io] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean.destroy - Closing JPA EntityManagerFactory for persistence unit 'default'
 03-02-2020 22:47:55.578 [SpringContextShutdownHook] [sytac.io] INFO  com.zaxxer.hikari.HikariDataSource.close - HikariPool-1 - Shutdown initiated...
 03-02-2020 22:47:55.596 [SpringContextShutdownHook] [sytac.io] INFO  com.zaxxer.hikari.HikariDataSource.close - HikariPool-1 - Shutdown completed.
+03-02-2020 23:18:58.700 [SpringContextShutdownHook] [sytac.io] INFO  o.s.s.c.ThreadPoolTaskExecutor.shutdown - Shutting down ExecutorService 'applicationTaskExecutor'
+03-02-2020 23:18:58.702 [SpringContextShutdownHook] [sytac.io] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean.destroy - Closing JPA EntityManagerFactory for persistence unit 'default'
+03-02-2020 23:18:58.944 [SpringContextShutdownHook] [sytac.io] WARN  o.s.b.f.s.DisposableBeanAdapter.destroy - Invocation of destroy method failed on bean with name 'inMemoryDatabaseShutdownExecutor': org.h2.jdbc.JdbcSQLNonTransientConnectionException: Database is already closed (to disable automatic closing at VM shutdown, add ";DB_CLOSE_ON_EXIT=FALSE" to the db URL) [90121-200]
+03-02-2020 23:18:58.945 [SpringContextShutdownHook] [sytac.io] INFO  com.zaxxer.hikari.HikariDataSource.close - HikariPool-1 - Shutdown initiated...
+03-02-2020 23:18:58.996 [SpringContextShutdownHook] [sytac.io] INFO  com.zaxxer.hikari.HikariDataSource.close - HikariPool-1 - Shutdown completed.

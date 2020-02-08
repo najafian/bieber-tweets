@@ -1,0 +1,190 @@
+07-02-2020 00:01:22.284 [Thread-27] [sytac.io] INFO  o.s.s.c.ThreadPoolTaskExecutor.shutdown - Shutting down ExecutorService 'applicationTaskExecutor'
+07-02-2020 00:01:22.297 [Thread-27] [sytac.io] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean.destroy - Closing JPA EntityManagerFactory for persistence unit 'default'
+07-02-2020 00:01:22.499 [Thread-27] [sytac.io] WARN  o.s.b.f.s.DisposableBeanAdapter.destroy - Invocation of destroy method failed on bean with name 'inMemoryDatabaseShutdownExecutor': org.h2.jdbc.JdbcSQLNonTransientConnectionException: Database is already closed (to disable automatic closing at VM shutdown, add ";DB_CLOSE_ON_EXIT=FALSE" to the db URL) [90121-200]
+07-02-2020 00:01:22.500 [Thread-27] [sytac.io] INFO  com.zaxxer.hikari.HikariDataSource.close - HikariPool-3 - Shutdown initiated...
+07-02-2020 00:01:22.507 [Thread-27] [sytac.io] INFO  com.zaxxer.hikari.HikariDataSource.close - HikariPool-3 - Shutdown completed.
+07-02-2020 00:01:22.923 [restartedMain] [sytac.io] INFO  o.i.twitter.TwitterApplication.logStarting - Starting TwitterApplication on mehdi-System-Product-Name with PID 24402 (/home/mehdi/developement/Java_Assignment/target/classes started by mehdi in /home/mehdi/developement/Java_Assignment)
+07-02-2020 00:01:22.924 [restartedMain] [sytac.io] INFO  o.i.twitter.TwitterApplication.logStartupProfileInfo - The following profiles are active: swagger
+07-02-2020 00:01:23.721 [restartedMain] [sytac.io] INFO  o.s.d.r.c.RepositoryConfigurationDelegate.registerRepositoriesIn - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+07-02-2020 00:01:23.752 [restartedMain] [sytac.io] INFO  o.s.d.r.c.RepositoryConfigurationDelegate.registerRepositoriesIn - Finished Spring Data repository scanning in 22ms. Found 1 JPA repository interfaces.
+07-02-2020 00:01:23.874 [restartedMain] [sytac.io] INFO  o.s.c.s.PostProcessorRegistrationDelegate$BeanPostProcessorChecker.postProcessAfterInitialization - Bean 'org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration' of type [org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+07-02-2020 00:01:24.138 [restartedMain] [sytac.io] INFO  o.s.b.w.e.tomcat.TomcatWebServer.initialize - Tomcat initialized with port(s): 8088 (http)
+07-02-2020 00:01:24.139 [restartedMain] [sytac.io] INFO  o.a.coyote.http11.Http11NioProtocol.log - Initializing ProtocolHandler ["http-nio-8088"]
+07-02-2020 00:01:24.139 [restartedMain] [sytac.io] INFO  o.a.catalina.core.StandardService.log - Starting service [Tomcat]
+07-02-2020 00:01:24.139 [restartedMain] [sytac.io] INFO  o.a.catalina.core.StandardEngine.log - Starting Servlet engine: [Apache Tomcat/9.0.30]
+07-02-2020 00:01:24.177 [restartedMain] [sytac.io] INFO  o.a.c.c.C.[Tomcat].[localhost].[/].log - Initializing Spring embedded WebApplicationContext
+07-02-2020 00:01:24.178 [restartedMain] [sytac.io] INFO  o.s.web.context.ContextLoader.prepareWebApplicationContext - Root WebApplicationContext: initialization completed in 1250 ms
+07-02-2020 00:01:24.253 [restartedMain] [sytac.io] INFO  com.zaxxer.hikari.HikariDataSource.getConnection - HikariPool-4 - Starting...
+07-02-2020 00:01:24.262 [restartedMain] [sytac.io] INFO  com.zaxxer.hikari.HikariDataSource.getConnection - HikariPool-4 - Start completed.
+07-02-2020 00:01:24.267 [restartedMain] [sytac.io] INFO  o.s.b.a.h.H2ConsoleAutoConfiguration.lambda$h2Console$0 - H2 console available at '/h2-console'. Database available at 'jdbc:h2:mem:SYTEC'
+07-02-2020 00:01:24.401 [restartedMain] [sytac.io] INFO  o.s.b.d.a.OptionalLiveReloadServer.startServer - LiveReload server is running on port 35729
+07-02-2020 00:01:24.469 [restartedMain] [sytac.io] INFO  o.h.jpa.internal.util.LogHelper.logPersistenceUnitInformation - HHH000204: Processing PersistenceUnitInfo [name: default]
+07-02-2020 00:01:24.486 [restartedMain] [sytac.io] INFO  org.hibernate.dialect.Dialect.<init> - HHH000400: Using dialect: org.hibernate.dialect.H2Dialect
+07-02-2020 00:01:24.588 [restartedMain] [sytac.io] INFO  o.h.e.t.j.p.i.JtaPlatformInitiator.initiateService - HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+07-02-2020 00:01:24.593 [restartedMain] [sytac.io] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean.buildNativeEntityManagerFactory - Initialized JPA EntityManagerFactory for persistence unit 'default'
+07-02-2020 00:01:24.957 [restartedMain] [sytac.io] WARN  o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration.openEntityManagerInViewInterceptor - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+07-02-2020 00:01:25.042 [restartedMain] [sytac.io] INFO  o.s.s.c.ThreadPoolTaskExecutor.initialize - Initializing ExecutorService 'applicationTaskExecutor'
+07-02-2020 00:01:25.166 [restartedMain] [sytac.io] INFO  o.a.coyote.http11.Http11NioProtocol.log - Starting ProtocolHandler ["http-nio-8088"]
+07-02-2020 00:01:25.173 [restartedMain] [sytac.io] INFO  o.s.b.w.e.tomcat.TomcatWebServer.start - Tomcat started on port(s): 8088 (http) with context path ''
+07-02-2020 00:01:25.174 [restartedMain] [sytac.io] INFO  o.i.twitter.TwitterApplication.logStarted - Started TwitterApplication in 2.417 seconds (JVM running for 2999.841)
+07-02-2020 00:01:25.175 [restartedMain] [sytac.io] INFO  o.s.b.d.a.ConditionEvaluationDeltaLoggingListener.onApplicationEvent - Condition evaluation unchanged
+07-02-2020 00:03:08.756 [Thread-32] [sytac.io] INFO  o.s.s.c.ThreadPoolTaskExecutor.shutdown - Shutting down ExecutorService 'applicationTaskExecutor'
+07-02-2020 00:03:08.769 [Thread-32] [sytac.io] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean.destroy - Closing JPA EntityManagerFactory for persistence unit 'default'
+07-02-2020 00:03:08.971 [Thread-32] [sytac.io] WARN  o.s.b.f.s.DisposableBeanAdapter.destroy - Invocation of destroy method failed on bean with name 'inMemoryDatabaseShutdownExecutor': org.h2.jdbc.JdbcSQLNonTransientConnectionException: Database is already closed (to disable automatic closing at VM shutdown, add ";DB_CLOSE_ON_EXIT=FALSE" to the db URL) [90121-200]
+07-02-2020 00:03:08.973 [Thread-32] [sytac.io] INFO  com.zaxxer.hikari.HikariDataSource.close - HikariPool-4 - Shutdown initiated...
+07-02-2020 00:03:08.985 [Thread-32] [sytac.io] INFO  com.zaxxer.hikari.HikariDataSource.close - HikariPool-4 - Shutdown completed.
+07-02-2020 00:03:09.366 [restartedMain] [sytac.io] INFO  o.i.twitter.TwitterApplication.logStarting - Starting TwitterApplication on mehdi-System-Product-Name with PID 24402 (/home/mehdi/developement/Java_Assignment/target/classes started by mehdi in /home/mehdi/developement/Java_Assignment)
+07-02-2020 00:03:09.367 [restartedMain] [sytac.io] INFO  o.i.twitter.TwitterApplication.logStartupProfileInfo - The following profiles are active: swagger
+07-02-2020 00:03:09.613 [restartedMain] [sytac.io] INFO  o.s.d.r.c.RepositoryConfigurationDelegate.registerRepositoriesIn - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+07-02-2020 00:03:09.622 [restartedMain] [sytac.io] INFO  o.s.d.r.c.RepositoryConfigurationDelegate.registerRepositoriesIn - Finished Spring Data repository scanning in 8ms. Found 1 JPA repository interfaces.
+07-02-2020 00:03:09.740 [restartedMain] [sytac.io] INFO  o.s.c.s.PostProcessorRegistrationDelegate$BeanPostProcessorChecker.postProcessAfterInitialization - Bean 'org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration' of type [org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+07-02-2020 00:03:09.926 [restartedMain] [sytac.io] INFO  o.s.b.w.e.tomcat.TomcatWebServer.initialize - Tomcat initialized with port(s): 8088 (http)
+07-02-2020 00:03:09.927 [restartedMain] [sytac.io] INFO  o.a.coyote.http11.Http11NioProtocol.log - Initializing ProtocolHandler ["http-nio-8088"]
+07-02-2020 00:03:09.927 [restartedMain] [sytac.io] INFO  o.a.catalina.core.StandardService.log - Starting service [Tomcat]
+07-02-2020 00:03:09.927 [restartedMain] [sytac.io] INFO  o.a.catalina.core.StandardEngine.log - Starting Servlet engine: [Apache Tomcat/9.0.30]
+07-02-2020 00:03:09.952 [restartedMain] [sytac.io] INFO  o.a.c.c.C.[Tomcat].[localhost].[/].log - Initializing Spring embedded WebApplicationContext
+07-02-2020 00:03:09.964 [restartedMain] [sytac.io] INFO  o.s.web.context.ContextLoader.prepareWebApplicationContext - Root WebApplicationContext: initialization completed in 593 ms
+07-02-2020 00:03:10.013 [restartedMain] [sytac.io] INFO  com.zaxxer.hikari.HikariDataSource.getConnection - HikariPool-5 - Starting...
+07-02-2020 00:03:10.020 [restartedMain] [sytac.io] INFO  com.zaxxer.hikari.HikariDataSource.getConnection - HikariPool-5 - Start completed.
+07-02-2020 00:03:10.031 [restartedMain] [sytac.io] INFO  o.s.b.a.h.H2ConsoleAutoConfiguration.lambda$h2Console$0 - H2 console available at '/h2-console'. Database available at 'jdbc:h2:mem:SYTEC'
+07-02-2020 00:03:10.177 [restartedMain] [sytac.io] INFO  o.s.b.d.a.OptionalLiveReloadServer.startServer - LiveReload server is running on port 35729
+07-02-2020 00:03:10.255 [restartedMain] [sytac.io] INFO  o.h.jpa.internal.util.LogHelper.logPersistenceUnitInformation - HHH000204: Processing PersistenceUnitInfo [name: default]
+07-02-2020 00:03:10.270 [restartedMain] [sytac.io] INFO  org.hibernate.dialect.Dialect.<init> - HHH000400: Using dialect: org.hibernate.dialect.H2Dialect
+07-02-2020 00:03:10.336 [restartedMain] [sytac.io] INFO  o.h.e.t.j.p.i.JtaPlatformInitiator.initiateService - HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+07-02-2020 00:03:10.337 [restartedMain] [sytac.io] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean.buildNativeEntityManagerFactory - Initialized JPA EntityManagerFactory for persistence unit 'default'
+07-02-2020 00:03:10.740 [restartedMain] [sytac.io] WARN  o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration.openEntityManagerInViewInterceptor - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+07-02-2020 00:03:10.898 [restartedMain] [sytac.io] INFO  o.s.s.c.ThreadPoolTaskExecutor.initialize - Initializing ExecutorService 'applicationTaskExecutor'
+07-02-2020 00:03:11.035 [restartedMain] [sytac.io] INFO  o.a.coyote.http11.Http11NioProtocol.log - Starting ProtocolHandler ["http-nio-8088"]
+07-02-2020 00:03:11.133 [restartedMain] [sytac.io] INFO  o.s.b.w.e.tomcat.TomcatWebServer.start - Tomcat started on port(s): 8088 (http) with context path ''
+07-02-2020 00:03:11.134 [restartedMain] [sytac.io] INFO  o.i.twitter.TwitterApplication.logStarted - Started TwitterApplication in 1.816 seconds (JVM running for 3105.801)
+07-02-2020 00:03:11.136 [restartedMain] [sytac.io] INFO  o.s.b.d.a.ConditionEvaluationDeltaLoggingListener.onApplicationEvent - Condition evaluation unchanged
+07-02-2020 00:33:04.212 [SpringContextShutdownHook] [sytac.io] INFO  o.s.s.c.ThreadPoolTaskExecutor.shutdown - Shutting down ExecutorService 'applicationTaskExecutor'
+07-02-2020 00:33:04.213 [SpringContextShutdownHook] [sytac.io] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean.destroy - Closing JPA EntityManagerFactory for persistence unit 'default'
+07-02-2020 00:33:04.420 [SpringContextShutdownHook] [sytac.io] WARN  o.s.b.f.s.DisposableBeanAdapter.destroy - Invocation of destroy method failed on bean with name 'inMemoryDatabaseShutdownExecutor': org.h2.jdbc.JdbcSQLNonTransientConnectionException: Database is already closed (to disable automatic closing at VM shutdown, add ";DB_CLOSE_ON_EXIT=FALSE" to the db URL) [90121-200]
+07-02-2020 00:33:04.421 [SpringContextShutdownHook] [sytac.io] INFO  com.zaxxer.hikari.HikariDataSource.close - HikariPool-5 - Shutdown initiated...
+07-02-2020 00:33:04.478 [SpringContextShutdownHook] [sytac.io] INFO  com.zaxxer.hikari.HikariDataSource.close - HikariPool-5 - Shutdown completed.
+07-02-2020 22:38:46.694 [main] [sytac.io] INFO  o.i.t.rest.TwitterControllerTest1.logStarting - Starting TwitterControllerTest1 on mehdi-System-Product-Name with PID 11863 (started by mehdi in /home/mehdi/developement/Java_Assignment)
+07-02-2020 22:38:46.696 [main] [sytac.io] INFO  o.i.t.rest.TwitterControllerTest1.logStartupProfileInfo - The following profiles are active: swagger
+07-02-2020 22:38:46.921 [background-preinit] [sytac.io] WARN  o.s.h.c.j.Jackson2ObjectMapperBuilder.warn - For Jackson Kotlin classes support please add "com.fasterxml.jackson.module:jackson-module-kotlin" to the classpath
+07-02-2020 22:38:48.023 [main] [sytac.io] INFO  o.s.d.r.c.RepositoryConfigurationDelegate.registerRepositoriesIn - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+07-02-2020 22:38:48.102 [main] [sytac.io] INFO  o.s.d.r.c.RepositoryConfigurationDelegate.registerRepositoriesIn - Finished Spring Data repository scanning in 67ms. Found 1 JPA repository interfaces.
+07-02-2020 22:38:48.544 [main] [sytac.io] INFO  o.s.c.s.PostProcessorRegistrationDelegate$BeanPostProcessorChecker.postProcessAfterInitialization - Bean 'org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration' of type [org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+07-02-2020 22:38:48.807 [main] [sytac.io] INFO  com.zaxxer.hikari.HikariDataSource.getConnection - HikariPool-1 - Starting...
+07-02-2020 22:38:49.072 [main] [sytac.io] INFO  com.zaxxer.hikari.HikariDataSource.getConnection - HikariPool-1 - Start completed.
+07-02-2020 22:38:49.287 [main] [sytac.io] INFO  o.h.jpa.internal.util.LogHelper.logPersistenceUnitInformation - HHH000204: Processing PersistenceUnitInfo [name: default]
+07-02-2020 22:38:49.389 [main] [sytac.io] INFO  org.hibernate.Version.logVersion - HHH000412: Hibernate Core {5.4.10.Final}
+07-02-2020 22:38:49.572 [main] [sytac.io] INFO  o.h.annotations.common.Version.<clinit> - HCANN000001: Hibernate Commons Annotations {5.1.0.Final}
+07-02-2020 22:38:49.725 [main] [sytac.io] INFO  org.hibernate.dialect.Dialect.<init> - HHH000400: Using dialect: org.hibernate.dialect.H2Dialect
+07-02-2020 22:38:50.266 [main] [sytac.io] INFO  o.h.e.t.j.p.i.JtaPlatformInitiator.initiateService - HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+07-02-2020 22:38:50.276 [main] [sytac.io] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean.buildNativeEntityManagerFactory - Initialized JPA EntityManagerFactory for persistence unit 'default'
+07-02-2020 22:38:51.589 [main] [sytac.io] WARN  o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration.openEntityManagerInViewInterceptor - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+07-02-2020 22:38:51.903 [main] [sytac.io] INFO  o.s.s.c.ThreadPoolTaskExecutor.initialize - Initializing ExecutorService 'applicationTaskExecutor'
+07-02-2020 22:38:52.445 [main] [sytac.io] INFO  o.i.t.rest.TwitterControllerTest1.logStarted - Started TwitterControllerTest1 in 6.889 seconds (JVM running for 8.482)
+07-02-2020 22:39:15.838 [SpringContextShutdownHook] [sytac.io] INFO  o.s.s.c.ThreadPoolTaskExecutor.shutdown - Shutting down ExecutorService 'applicationTaskExecutor'
+07-02-2020 22:39:15.841 [SpringContextShutdownHook] [sytac.io] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean.destroy - Closing JPA EntityManagerFactory for persistence unit 'default'
+07-02-2020 22:39:15.852 [SpringContextShutdownHook] [sytac.io] INFO  com.zaxxer.hikari.HikariDataSource.close - HikariPool-1 - Shutdown initiated...
+07-02-2020 22:39:15.886 [SpringContextShutdownHook] [sytac.io] INFO  com.zaxxer.hikari.HikariDataSource.close - HikariPool-1 - Shutdown completed.
+07-02-2020 22:39:15.899 [main] [sytac.io] WARN  o.s.test.context.TestContextManager.logException - Caught exception while invoking 'afterTestClass' callback on TestExecutionListener [org.springframework.test.context.event.EventPublishingTestExecutionListener@201b6b6f] for test class [class org.interview.twitter.rest.TwitterControllerTest]
+java.lang.IllegalStateException: The ApplicationContext loaded for [[WebMergedContextConfiguration@41e350f1 testClass = TwitterControllerTest1, locations = '{}', classes = '{class org.interview.twitter.TwitterApplication}', contextInitializerClasses = '[]', activeProfiles = '{}', propertySourceLocations = '{}', propertySourceProperties = '{org.springframework.boot.test.context.SpringBootTestContextBootstrapper=true}', contextCustomizers = set[org.springframework.boot.test.autoconfigure.properties.PropertyMappingContextCustomizer@0, org.springframework.boot.test.autoconfigure.web.servlet.WebDriverContextCustomizerFactory$Customizer@4b5189ac, org.springframework.boot.test.context.filter.ExcludeFilterContextCustomizer@6e01f9b0, org.springframework.boot.test.json.DuplicateJsonObjectContextCustomizerFactory$DuplicateJsonObjectContextCustomizer@658c5a19, org.springframework.boot.test.mock.mockito.MockitoContextCustomizer@0, org.springframework.boot.test.web.client.TestRestTemplateContextCustomizer@1b8a29df], resourceBasePath = 'src/main/webapp', contextLoader = 'org.springframework.boot.test.context.SpringBootContextLoader', parent = [null]]] is not active. This may be due to one of the following reasons: 1) the context was closed programmatically by user code; 2) the context was closed during parallel test execution either according to @DirtiesContext semantics or due to automatic eviction from the ContextCache due to a maximum cache size policy.
+	at org.springframework.util.Assert.state(Assert.java:94)
+	at org.springframework.test.context.support.DefaultTestContext.getApplicationContext(DefaultTestContext.java:127)
+	at org.springframework.test.context.TestContext.publishEvent(TestContext.java:94)
+	at org.springframework.test.context.event.EventPublishingTestExecutionListener.afterTestClass(EventPublishingTestExecutionListener.java:147)
+	at org.springframework.test.context.TestContextManager.afterTestClass(TestContextManager.java:488)
+	at org.springframework.test.context.junit.jupiter.SpringExtension.afterAll(SpringExtension.java:86)
+	at org.junit.jupiter.engine.descriptor.ClassBasedTestDescriptor.lambda$invokeAfterAllCallbacks$13(ClassBasedTestDescriptor.java:421)
+	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:73)
+	at org.junit.jupiter.engine.descriptor.ClassBasedTestDescriptor.lambda$invokeAfterAllCallbacks$14(ClassBasedTestDescriptor.java:421)
+	at java.util.ArrayList.forEach(ArrayList.java:1257)
+	at org.junit.jupiter.engine.descriptor.ClassBasedTestDescriptor.invokeAfterAllCallbacks(ClassBasedTestDescriptor.java:421)
+	at org.junit.jupiter.engine.descriptor.ClassBasedTestDescriptor.after(ClassBasedTestDescriptor.java:213)
+	at org.junit.jupiter.engine.descriptor.ClassBasedTestDescriptor.after(ClassBasedTestDescriptor.java:77)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$6(NodeTestTask.java:145)
+	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:73)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$7(NodeTestTask.java:145)
+	at org.junit.platform.engine.support.hierarchical.Node.around(Node.java:135)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$8(NodeTestTask.java:123)
+	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:73)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.executeRecursively(NodeTestTask.java:122)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.execute(NodeTestTask.java:80)
+	at java.util.ArrayList.forEach(ArrayList.java:1257)
+	at org.junit.platform.engine.support.hierarchical.SameThreadHierarchicalTestExecutorService.invokeAll(SameThreadHierarchicalTestExecutorService.java:38)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$5(NodeTestTask.java:139)
+	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:73)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$7(NodeTestTask.java:125)
+	at org.junit.platform.engine.support.hierarchical.Node.around(Node.java:135)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$8(NodeTestTask.java:123)
+	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:73)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.executeRecursively(NodeTestTask.java:122)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.execute(NodeTestTask.java:80)
+	at org.junit.platform.engine.support.hierarchical.SameThreadHierarchicalTestExecutorService.submit(SameThreadHierarchicalTestExecutorService.java:32)
+	at org.junit.platform.engine.support.hierarchical.HierarchicalTestExecutor.execute(HierarchicalTestExecutor.java:57)
+	at org.junit.platform.engine.support.hierarchical.HierarchicalTestEngine.execute(HierarchicalTestEngine.java:51)
+	at org.junit.platform.launcher.core.DefaultLauncher.execute(DefaultLauncher.java:229)
+	at org.junit.platform.launcher.core.DefaultLauncher.lambda$execute$6(DefaultLauncher.java:197)
+	at org.junit.platform.launcher.core.DefaultLauncher.withInterceptedStreams(DefaultLauncher.java:211)
+	at org.junit.platform.launcher.core.DefaultLauncher.execute(DefaultLauncher.java:191)
+	at org.junit.platform.launcher.core.DefaultLauncher.execute(DefaultLauncher.java:128)
+	at com.intellij.junit5.JUnit5IdeaTestRunner.startRunnerWithArgs(JUnit5IdeaTestRunner.java:69)
+	at com.intellij.rt.execution.junit.IdeaTestRunner$Repeater.startRunnerWithArgs(IdeaTestRunner.java:47)
+	at com.intellij.rt.execution.junit.JUnitStarter.prepareStreamsAndStart(JUnitStarter.java:242)
+	at com.intellij.rt.execution.junit.JUnitStarter.main(JUnitStarter.java:70)
+07-02-2020 22:39:20.505 [main] [sytac.io] INFO  o.i.t.rest.TwitterControllerTest1.logStarting - Starting TwitterControllerTest1 on mehdi-System-Product-Name with PID 11954 (started by mehdi in /home/mehdi/developement/Java_Assignment)
+07-02-2020 22:39:20.507 [main] [sytac.io] INFO  o.i.t.rest.TwitterControllerTest1.logStartupProfileInfo - The following profiles are active: swagger
+07-02-2020 22:39:20.770 [background-preinit] [sytac.io] WARN  o.s.h.c.j.Jackson2ObjectMapperBuilder.warn - For Jackson Kotlin classes support please add "com.fasterxml.jackson.module:jackson-module-kotlin" to the classpath
+07-02-2020 22:39:21.859 [main] [sytac.io] INFO  o.s.d.r.c.RepositoryConfigurationDelegate.registerRepositoriesIn - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+07-02-2020 22:39:21.926 [main] [sytac.io] INFO  o.s.d.r.c.RepositoryConfigurationDelegate.registerRepositoriesIn - Finished Spring Data repository scanning in 56ms. Found 1 JPA repository interfaces.
+07-02-2020 22:39:22.363 [main] [sytac.io] INFO  o.s.c.s.PostProcessorRegistrationDelegate$BeanPostProcessorChecker.postProcessAfterInitialization - Bean 'org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration' of type [org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+07-02-2020 22:39:22.610 [main] [sytac.io] INFO  com.zaxxer.hikari.HikariDataSource.getConnection - HikariPool-1 - Starting...
+07-02-2020 22:39:22.843 [main] [sytac.io] INFO  com.zaxxer.hikari.HikariDataSource.getConnection - HikariPool-1 - Start completed.
+07-02-2020 22:39:23.030 [main] [sytac.io] INFO  o.h.jpa.internal.util.LogHelper.logPersistenceUnitInformation - HHH000204: Processing PersistenceUnitInfo [name: default]
+07-02-2020 22:39:23.118 [main] [sytac.io] INFO  org.hibernate.Version.logVersion - HHH000412: Hibernate Core {5.4.10.Final}
+07-02-2020 22:39:23.287 [main] [sytac.io] INFO  o.h.annotations.common.Version.<clinit> - HCANN000001: Hibernate Commons Annotations {5.1.0.Final}
+07-02-2020 22:39:23.446 [main] [sytac.io] INFO  org.hibernate.dialect.Dialect.<init> - HHH000400: Using dialect: org.hibernate.dialect.H2Dialect
+07-02-2020 22:39:24.029 [main] [sytac.io] INFO  o.h.e.t.j.p.i.JtaPlatformInitiator.initiateService - HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+07-02-2020 22:39:24.040 [main] [sytac.io] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean.buildNativeEntityManagerFactory - Initialized JPA EntityManagerFactory for persistence unit 'default'
+07-02-2020 22:39:25.360 [main] [sytac.io] WARN  o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration.openEntityManagerInViewInterceptor - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+07-02-2020 22:39:25.662 [main] [sytac.io] INFO  o.s.s.c.ThreadPoolTaskExecutor.initialize - Initializing ExecutorService 'applicationTaskExecutor'
+07-02-2020 22:39:26.237 [main] [sytac.io] INFO  o.i.t.rest.TwitterControllerTest1.logStarted - Started TwitterControllerTest1 in 6.774 seconds (JVM running for 8.297)
+07-02-2020 22:39:45.022 [SpringContextShutdownHook] [sytac.io] INFO  o.s.s.c.ThreadPoolTaskExecutor.shutdown - Shutting down ExecutorService 'applicationTaskExecutor'
+07-02-2020 22:39:45.025 [SpringContextShutdownHook] [sytac.io] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean.destroy - Closing JPA EntityManagerFactory for persistence unit 'default'
+07-02-2020 22:39:45.030 [SpringContextShutdownHook] [sytac.io] INFO  com.zaxxer.hikari.HikariDataSource.close - HikariPool-1 - Shutdown initiated...
+07-02-2020 22:39:45.039 [SpringContextShutdownHook] [sytac.io] INFO  com.zaxxer.hikari.HikariDataSource.close - HikariPool-1 - Shutdown completed.
+07-02-2020 23:34:43.282 [restartedMain] [sytac.io] INFO  o.i.twitter.TwitterApplication.logStarting - Starting TwitterApplication on mehdi-System-Product-Name with PID 13968 (/home/mehdi/developement/Java_Assignment/target/classes started by mehdi in /home/mehdi/developement/Java_Assignment)
+07-02-2020 23:34:43.287 [restartedMain] [sytac.io] INFO  o.i.twitter.TwitterApplication.logStartupProfileInfo - The following profiles are active: swagger
+07-02-2020 23:34:43.279 [background-preinit] [sytac.io] WARN  o.s.h.c.j.Jackson2ObjectMapperBuilder.warn - For Jackson Kotlin classes support please add "com.fasterxml.jackson.module:jackson-module-kotlin" to the classpath
+07-02-2020 23:34:43.470 [restartedMain] [sytac.io] INFO  o.s.b.d.restart.ChangeableUrls.logTo - The Class-Path manifest attribute in /home/mehdi/.m2/repository/org/glassfish/jaxb/jaxb-runtime/2.3.2/jaxb-runtime-2.3.2.jar referenced one or more files that do not exist: file:/home/mehdi/.m2/repository/org/glassfish/jaxb/jaxb-runtime/2.3.2/jakarta.xml.bind-api-2.3.2.jar,file:/home/mehdi/.m2/repository/org/glassfish/jaxb/jaxb-runtime/2.3.2/txw2-2.3.2.jar,file:/home/mehdi/.m2/repository/org/glassfish/jaxb/jaxb-runtime/2.3.2/istack-commons-runtime-3.0.8.jar,file:/home/mehdi/.m2/repository/org/glassfish/jaxb/jaxb-runtime/2.3.2/stax-ex-1.8.1.jar,file:/home/mehdi/.m2/repository/org/glassfish/jaxb/jaxb-runtime/2.3.2/FastInfoset-1.2.16.jar,file:/home/mehdi/.m2/repository/org/glassfish/jaxb/jaxb-runtime/2.3.2/jakarta.activation-api-1.2.1.jar
+07-02-2020 23:34:43.471 [restartedMain] [sytac.io] INFO  o.s.b.d.e.DevToolsPropertyDefaultsPostProcessor.logTo - Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+07-02-2020 23:34:43.471 [restartedMain] [sytac.io] INFO  o.s.b.d.e.DevToolsPropertyDefaultsPostProcessor.logTo - For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+07-02-2020 23:34:44.507 [restartedMain] [sytac.io] INFO  o.s.d.r.c.RepositoryConfigurationDelegate.registerRepositoriesIn - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+07-02-2020 23:34:44.561 [restartedMain] [sytac.io] INFO  o.s.d.r.c.RepositoryConfigurationDelegate.registerRepositoriesIn - Finished Spring Data repository scanning in 44ms. Found 1 JPA repository interfaces.
+07-02-2020 23:34:44.844 [restartedMain] [sytac.io] INFO  o.s.c.s.PostProcessorRegistrationDelegate$BeanPostProcessorChecker.postProcessAfterInitialization - Bean 'org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration' of type [org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+07-02-2020 23:34:45.289 [restartedMain] [sytac.io] INFO  o.s.b.w.e.tomcat.TomcatWebServer.initialize - Tomcat initialized with port(s): 8088 (http)
+07-02-2020 23:34:45.305 [restartedMain] [sytac.io] INFO  o.a.coyote.http11.Http11NioProtocol.log - Initializing ProtocolHandler ["http-nio-8088"]
+07-02-2020 23:34:45.306 [restartedMain] [sytac.io] INFO  o.a.catalina.core.StandardService.log - Starting service [Tomcat]
+07-02-2020 23:34:45.307 [restartedMain] [sytac.io] INFO  o.a.catalina.core.StandardEngine.log - Starting Servlet engine: [Apache Tomcat/9.0.30]
+07-02-2020 23:34:45.379 [restartedMain] [sytac.io] INFO  o.a.c.c.C.[Tomcat].[localhost].[/].log - Initializing Spring embedded WebApplicationContext
+07-02-2020 23:34:45.380 [restartedMain] [sytac.io] INFO  o.s.web.context.ContextLoader.prepareWebApplicationContext - Root WebApplicationContext: initialization completed in 1909 ms
+07-02-2020 23:34:45.422 [restartedMain] [sytac.io] INFO  com.zaxxer.hikari.HikariDataSource.getConnection - HikariPool-1 - Starting...
+07-02-2020 23:34:45.513 [restartedMain] [sytac.io] INFO  com.zaxxer.hikari.HikariDataSource.getConnection - HikariPool-1 - Start completed.
+07-02-2020 23:34:45.544 [restartedMain] [sytac.io] INFO  o.s.b.a.h.H2ConsoleAutoConfiguration.lambda$h2Console$0 - H2 console available at '/h2-console'. Database available at 'jdbc:h2:mem:SYTEC'
+07-02-2020 23:34:45.628 [restartedMain] [sytac.io] INFO  o.s.b.d.a.OptionalLiveReloadServer.startServer - LiveReload server is running on port 35729
+07-02-2020 23:34:45.699 [restartedMain] [sytac.io] INFO  o.h.jpa.internal.util.LogHelper.logPersistenceUnitInformation - HHH000204: Processing PersistenceUnitInfo [name: default]
+07-02-2020 23:34:45.762 [restartedMain] [sytac.io] INFO  org.hibernate.Version.logVersion - HHH000412: Hibernate Core {5.4.10.Final}
+07-02-2020 23:34:45.877 [restartedMain] [sytac.io] INFO  o.h.annotations.common.Version.<clinit> - HCANN000001: Hibernate Commons Annotations {5.1.0.Final}
+07-02-2020 23:34:45.964 [restartedMain] [sytac.io] INFO  org.hibernate.dialect.Dialect.<init> - HHH000400: Using dialect: org.hibernate.dialect.H2Dialect
+07-02-2020 23:34:46.321 [restartedMain] [sytac.io] INFO  o.h.e.t.j.p.i.JtaPlatformInitiator.initiateService - HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+07-02-2020 23:34:46.327 [restartedMain] [sytac.io] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean.buildNativeEntityManagerFactory - Initialized JPA EntityManagerFactory for persistence unit 'default'
+07-02-2020 23:34:47.008 [restartedMain] [sytac.io] WARN  o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration.openEntityManagerInViewInterceptor - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+07-02-2020 23:34:47.139 [restartedMain] [sytac.io] INFO  o.s.s.c.ThreadPoolTaskExecutor.initialize - Initializing ExecutorService 'applicationTaskExecutor'
+07-02-2020 23:34:47.341 [restartedMain] [sytac.io] INFO  o.a.coyote.http11.Http11NioProtocol.log - Starting ProtocolHandler ["http-nio-8088"]
+07-02-2020 23:34:47.361 [restartedMain] [sytac.io] INFO  o.s.b.w.e.tomcat.TomcatWebServer.start - Tomcat started on port(s): 8088 (http) with context path ''
+07-02-2020 23:34:47.364 [restartedMain] [sytac.io] INFO  o.i.twitter.TwitterApplication.logStarted - Started TwitterApplication in 4.883 seconds (JVM running for 5.668)
+07-02-2020 23:35:10.567 [http-nio-8088-exec-1] [sytac.io] INFO  o.a.c.c.C.[Tomcat].[localhost].[/].log - Initializing Spring DispatcherServlet 'dispatcherServlet'
+07-02-2020 23:35:10.567 [http-nio-8088-exec-1] [sytac.io] INFO  o.s.web.servlet.DispatcherServlet.initServletBean - Initializing Servlet 'dispatcherServlet'
+07-02-2020 23:35:10.578 [http-nio-8088-exec-1] [sytac.io] INFO  o.s.web.servlet.DispatcherServlet.initServletBean - Completed initialization in 11 ms
+07-02-2020 23:41:41.787 [SpringContextShutdownHook] [sytac.io] INFO  o.s.s.c.ThreadPoolTaskExecutor.shutdown - Shutting down ExecutorService 'applicationTaskExecutor'
+07-02-2020 23:41:41.790 [SpringContextShutdownHook] [sytac.io] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean.destroy - Closing JPA EntityManagerFactory for persistence unit 'default'
+07-02-2020 23:41:42.015 [SpringContextShutdownHook] [sytac.io] WARN  o.s.b.f.s.DisposableBeanAdapter.destroy - Invocation of destroy method failed on bean with name 'inMemoryDatabaseShutdownExecutor': org.h2.jdbc.JdbcSQLNonTransientConnectionException: Database is already closed (to disable automatic closing at VM shutdown, add ";DB_CLOSE_ON_EXIT=FALSE" to the db URL) [90121-200]
+07-02-2020 23:41:42.016 [SpringContextShutdownHook] [sytac.io] INFO  com.zaxxer.hikari.HikariDataSource.close - HikariPool-1 - Shutdown initiated...
+07-02-2020 23:41:42.019 [SpringContextShutdownHook] [sytac.io] INFO  com.zaxxer.hikari.HikariDataSource.close - HikariPool-1 - Shutdown completed.

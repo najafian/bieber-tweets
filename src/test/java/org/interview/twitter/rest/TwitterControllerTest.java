@@ -1,37 +1,40 @@
 package org.interview.twitter.rest;
 
 import org.interview.twitter.exception.TwitterAuthenticationException;
-import org.interview.twitter.model.TwitterRequestDto;
-import org.interview.twitter.service.facade.TwitterAuthenticatorUtils;
-import org.junit.Ignore;
+import org.interview.twitter.model.*;
+import org.interview.twitter.service.TwitterService;
+import org.interview.twitter.service.facade.TwitterDBService;
+import org.interview.twitter.webservice.rest.TwitterController;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.junit.runner.RunWith;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.Mockito;
+import org.mockito.junit.jupiter.MockitoExtension;
+
+import org.junit.platform.runner.JUnitPlatform;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.http.*;
-import org.springframework.test.context.junit4.SpringRunner;
-import org.springframework.web.client.RestTemplate;
 
-import java.net.URI;
-import java.net.URISyntaxException;
+
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
-import static org.springframework.test.util.AssertionErrors.assertNotEquals;
+import static org.springframework.test.util.AssertionErrors.assertEquals;
 import static org.springframework.test.util.AssertionErrors.assertTrue;
 
-@RunWith(SpringRunner.class)
-@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
+@ExtendWith(MockitoExtension.class)
+@RunWith(JUnitPlatform.class)
+@SpringBootTest
 class TwitterControllerTest {
-    private Logger logger = LoggerFactory.getLogger(this.getClass());
-    private TwitterRequestDto twitterRequestDto;
-    private HttpHeaders headers;
-    private URI uri;
+    private List<TwitterResponseDto> twitterMessage;
+    private List<TweetMapper> tweetMappers;
     @Value("${twitter.keys.consumerKey}")
     private String consumerKey;
 
@@ -41,81 +44,52 @@ class TwitterControllerTest {
     @Value("${twitter.keys.appName}")
     private String appName;
 
-    private RestTemplate restTemplate;
-    private TwitterAuthenticatorUtils twitterAuthenticatorUtils;
+    @Autowired
+    TwitterController twitterController;
 
     @Autowired
-    public TwitterControllerTest(RestTemplate restTemplate,
-                                 TwitterAuthenticatorUtils twitterAuthenticatorUtils) {
-        this.restTemplate = restTemplate;
-        this.twitterAuthenticatorUtils = twitterAuthenticatorUtils;
-    }
+    private TwitterDBService dbService;
+
+    @Mock
+    TwitterService twitterService;
+
+    @InjectMocks
+    TwitterController injectedTwitterController;
+
 
     @BeforeEach
     void setUp() {
-        headers = new HttpHeaders();
-        headers.setContentType(MediaType.APPLICATION_JSON);
-        final String baseUrl = "http://localhost:8080/api/";
-        try {
-            uri = new URI(baseUrl);
-        } catch (URISyntaxException e) {
-            e.printStackTrace();
-        }
-        twitterRequestDto = new TwitterRequestDto(appName, null, consumerKey, consumerSecret, "Bieber");
+        Date creationDate = new Date();
+        tweetMappers = new ArrayList<>();
+        TweetMapper tweetMapper = new TweetMapper("1", creationDate, "tweet text", new AuthorMapper("1", creationDate, "mehdi", "mehdiScreenName"));
+        tweetMappers.add(tweetMapper);
     }
 
     @AfterEach
     void tearDown() {
     }
 
+    @Test
+    @DisplayName("Find All Twitter Retrieved From H2 Database")
+    void testFindAllTwitterRetrieved() {
+        dbService.saveTwitterMessage(tweetMappers);
+        List<TwitterResponseDto> allPreservedTwitters = twitterController.getAllPreservedTwitters();
+        assertTrue("it is retrieved tweets correctly", allPreservedTwitters.size() == 1);
+    }
 
     @Test
     @DisplayName("Generate URI for PinID Method")
-    void testGeneratePinUriFromKeys() {
-        StringBuilder params = new StringBuilder()
-                .append(uri.toString())
-                .append("GenerateUrl")
-                .append("?consumerKey=")
-                .append(consumerKey)
-                .append("&consumerSecretKey=")
-                .append(consumerSecret);
-
-        ResponseEntity<String> responseEntity = this.restTemplate.exchange(
-                uri.resolve(params.toString()),
-                HttpMethod.GET,
-                new HttpEntity<>(headers),
-                String.class);
-        String body = responseEntity.getBody();
-        assertNotEquals("Number of tweet is not equal to -1", -1, body);
+    void testGeneratePinUriFromKeys() throws TwitterAuthenticationException {
+        String pinUri = twitterController.generatePinUriFromKeys(consumerKey, consumerSecret);
+        assertTrue("the twitter url for PinID is correctly created", pinUri.contains("api.twitter.com"));
     }
 
-    /**
-     * It is not possible with 2 level Authentication in Twitter website to test with JUnit
-     *
-     * Only We should test it via Client-Side
-     */
     @Test
+    @DisplayName("Retrieve List From Twitter And Save tweets into DB")
     void testRetrieveListFromTwitterAndSave() throws TwitterAuthenticationException {
-        HttpEntity<?> httpEntity = new HttpEntity<Object>(twitterRequestDto, headers);
-        ResponseEntity<Integer> responseEntity = this.restTemplate.exchange(
-                uri,
-                HttpMethod.PUT,
-                httpEntity,
-                Integer.class);
-        Integer numberOfBieberTweets = responseEntity.getBody();
-        logger.info("Number of bieber tweets are: " + numberOfBieberTweets);
-        assertNotEquals("Number of tweet is not equal to -1", -1, numberOfBieberTweets);
-    }
-
-
-    @Test
-    void getAllPreservedTwitters() {
-        ResponseEntity<List> listResponseEntity = restTemplate.exchange(
-                uri,
-                HttpMethod.GET,
-                new HttpEntity(headers),
-                List.class);
-        logger.info("Number of twitters retrieved from Database: \n" + listResponseEntity.getBody());
-        assertTrue("There are Some twitter messages in Database", listResponseEntity.getBody()!=null);
+        TwitterRequestDto twitterRequestDto = new TwitterRequestDto(appName, "", consumerKey, consumerSecret, "bieber");
+        Mockito.when(twitterService.retrieveAndSaveToDatabase(twitterRequestDto)).thenReturn(100);
+        int numberOfTweets = injectedTwitterController.retrieveListFromTwitterAndSave(twitterRequestDto);
+        assertEquals("number Of Tweets are!", 100, numberOfTweets);
     }
 }

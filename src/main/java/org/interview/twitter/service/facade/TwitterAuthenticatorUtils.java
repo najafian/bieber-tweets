@@ -63,9 +63,11 @@ public class TwitterAuthenticatorUtils {
      */
     public void retrieveAuthenticationPinID(TwitterRequestDto twitterRequestDto)
             throws TwitterAuthenticationException {
-        String AuthorizedUri = makeUriFromKeys(twitterRequestDto.getConsumerKey(), twitterRequestDto.getConsumerSecurityKey());
-        String generatedPinID = twitterRequestDto.getPinID()==null? retrievePin(AuthorizedUri):twitterRequestDto.getPinID();
-        twitterRequestDto.setPinID(generatedPinID);
+        if (twitterRequestDto.getPinID() == null) {
+            String AuthorizedUri = makeUriFromKeys(twitterRequestDto.getConsumerKey(), twitterRequestDto.getConsumerSecurityKey());
+            String generatedPinID = retrievePin(AuthorizedUri);
+            twitterRequestDto.setPinID(generatedPinID);
+        }
     }
 
     /**
