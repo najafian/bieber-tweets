@@ -29,19 +29,19 @@ public class TwitterDBService {
     @Transactional
     @Modifying
     public boolean saveTwitterMessage(@NotNull List<TweetMapper> tweetMapper) {
-        try{
-        tweetMapper.stream()
-                .sorted(TweetMapper::compareTo)
-                .forEach(item -> {
-            TwitterMessage twitterMessage = new TwitterMessage();
-            twitterMessage.setMessageId(Long.valueOf(item.getMessageId()));
-            twitterMessage.setCreationDate(item.getCreationDate());
-            twitterMessage.setMessageText(item.getMessageText());
-            twitterMessage.setAuthor(convertAuthorMapper(item.getAuthor()));
-            logger.info(twitterMessage.toString());
-            twitterMessageRepository.save(twitterMessage);
-        });
-        }catch (Exception e){
+        try {
+            tweetMapper.stream()
+                    .sorted(TweetMapper::compareTo)
+                    .forEach(item -> {
+                        TwitterMessage twitterMessage = new TwitterMessage();
+                        twitterMessage.setMessageId(Long.valueOf(item.getMessageId()));
+                        twitterMessage.setCreationDate(item.getCreationDate());
+                        twitterMessage.setMessageText(item.getMessageText());
+                        twitterMessage.setAuthor(convertAuthorMapper(item.getAuthor()));
+                        logger.info(twitterMessage.toString());
+                        twitterMessageRepository.save(twitterMessage);
+                    });
+        } catch (Exception e) {
             System.out.println(e.getMessage());
         }
         return true;

@@ -31,9 +31,17 @@
     "sass": "^1.25.0",
     "save": "^2.4.0"
   },
+  "devDependencies": {
+    "copyfiles": "^2.1.1",
+    "mkdirp": "^0.5.1",
+    "rimraf": "^3.0.0"
+  },
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
+    "postbuild": "npm run deploy",
+    "predeploy": "rimraf ../resources/static/ && mkdirp ../resources/static/",
+    "deploy": "copyfiles -f build/** ../resources/static/ && copyfiles -f build/static/js/** ../resources/static/static/js/ && copyfiles -f build/static/css/** ../resources/static/static/css/ && copyfiles -f build/static/media/** ../resources/static/static/media/",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },

@@ -17,8 +17,12 @@ import org.springframework.stereotype.Service;
  */
 @Service
 public class TwitterFacadeServiceImpl implements TwitterService {
-    @Autowired
     private TwitterUtils twitterUtils;
+
+    @Autowired
+    public TwitterFacadeServiceImpl(TwitterUtils twitterUtils) {
+        this.twitterUtils = twitterUtils;
+    }
 
     @Override
     public int retrieveAndSaveToDatabase(TwitterRequestDto twitterRequestDto) throws TwitterAuthenticationException {

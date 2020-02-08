@@ -18,6 +18,7 @@ class TwitterInitialPage extends React.Component<ICardInstituteProps> {
     private PinIDBtn: Button;
     private showResultBtn: Button;
     private ResultFromTwitterBtn: Button;
+    private numberOfRecord = 0;
 
     constructor(props: any) {
         super(props);
@@ -33,9 +34,8 @@ class TwitterInitialPage extends React.Component<ICardInstituteProps> {
         }
         let twitterApiGetAndSave = this.props.twitterApiReducer.twitterApiGetAndSave;
         if (twitterApiGetAndSave !== prevProps.twitterApiReducer.twitterApiGetAndSave) {
-            let resultTweets = JSON.stringify(twitterApiGetAndSave);
-            console.log(resultTweets);
-            console.log(twitterApiGetAndSave.length);
+            this.numberOfRecord = twitterApiGetAndSave;
+            this.showResultBtn.disabled = false;
         }
         let twitterApiGetResultFromDB = this.props.twitterApiReducer.twitterApiGetResultFromDB;
         if (twitterApiGetResultFromDB !== prevProps.twitterApiReducer.twitterApiGetResultFromDB) {
@@ -59,14 +59,14 @@ class TwitterInitialPage extends React.Component<ICardInstituteProps> {
         this.PinIDBtn.appendTo('#PinIDBtn');
         this.ResultFromTwitterBtn.appendTo('#saveInDBBtn');
         this.showResultBtn.appendTo('#showResultBtn');
-
+        this.showResultBtn.disabled = true;
         this.getPinUri();
         this.getDataFromTwitter();
         this.showResult();
     }
 
     private showResult() {
-        this.props.history.push('/main-rps-game');
+        this.props.history.push('/sytac');
         this.showResultBtn.element.addEventListener('click', () => {
             this.props.getResultFromDB();
         });
@@ -80,7 +80,7 @@ class TwitterInitialPage extends React.Component<ICardInstituteProps> {
             let keywordSearch = this.keywordInput.value;
             if (conKey.length > 0 &&
                 conSecKey.length > 0 &&
-                keywordSearch.length > 0)
+                keywordSearch.length > 0) {
                 this.props.getResultFromTwitter({
                     applicationName: this.appName.value,
                     consumerKey: conKey,
@@ -88,7 +88,8 @@ class TwitterInitialPage extends React.Component<ICardInstituteProps> {
                     keywordSearch: keywordSearch,
                     pinID: pinID
                 });
-            else
+                this.ResultFromTwitterBtn.disabled = true;
+            } else
                 alert('please fill all inputs!');
         });
     }
@@ -123,17 +124,26 @@ class TwitterInitialPage extends React.Component<ICardInstituteProps> {
                     <div className="topPadding">
                         <input id="consumeSecurityKeyID"/>
                     </div>
-                    <div className="topPadding">
-                        <div id="PinIDBtn">Get PinID From Twitter</div>
+                    <div className="row topPadding">
+                        <div className="col-md-5">
+                            <button style={{position: 'absolute', bottom: '0px'}} id="PinIDBtn">Get PinID From Twitter
+                            </button>
+                        </div>
+                        <div className="col-md-7"><input id="PinIDInput"/></div>
                     </div>
-                    <div className="topPadding">
-                        <input id="PinIDInput"/>
+                    <hr/>
+                    <div className={"row topPadding"}>
+                        <div className="col-md-6">
+                            <div id="saveInDBBtn">Get tweets and save into DB</div>
+                        </div>
+                        <div className="col-md-6"><label style={{width: '100%', fontSize: '10px'}}>A number of records
+                            are saved in
+                            database: {this.numberOfRecord}</label></div>
+
                     </div>
+
                     <div className="topPadding">
-                        <div id="saveInDBBtn">Get tweets and save into DB</div>
-                    </div>
-                    <div className="topPadding">
-                        <div id="showResultBtn">Show Result</div>
+                        <button id="showResultBtn">Show Result</button>
                     </div>
 
                 </div>

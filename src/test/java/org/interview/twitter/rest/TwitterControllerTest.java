@@ -3,6 +3,7 @@ package org.interview.twitter.rest;
 import org.interview.twitter.exception.TwitterAuthenticationException;
 import org.interview.twitter.model.*;
 import org.interview.twitter.service.TwitterService;
+import org.interview.twitter.service.facade.TwitterDBService;
 import org.interview.twitter.webservice.rest.TwitterController;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
@@ -11,12 +12,14 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
+import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import org.junit.platform.runner.JUnitPlatform;
-import org.mockito.Mock;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.boot.test.context.SpringBootTest;
 
 
 import java.util.ArrayList;
@@ -28,8 +31,10 @@ import static org.springframework.test.util.AssertionErrors.assertTrue;
 
 @ExtendWith(MockitoExtension.class)
 @RunWith(JUnitPlatform.class)
+@SpringBootTest
 class TwitterControllerTest {
-
+    private List<TwitterResponseDto> twitterMessage;
+    private List<TweetMapper> tweetMappers;
     @Value("${twitter.keys.consumerKey}")
     private String consumerKey;
 
@@ -39,15 +44,25 @@ class TwitterControllerTest {
     @Value("${twitter.keys.appName}")
     private String appName;
 
-    @InjectMocks
+    @Autowired
     TwitterController twitterController;
+
+    @Autowired
+    private TwitterDBService dbService;
 
     @Mock
     TwitterService twitterService;
 
+    @InjectMocks
+    TwitterController injectedTwitterController;
+
+
     @BeforeEach
     void setUp() {
-
+        Date creationDate = new Date();
+        tweetMappers = new ArrayList<>();
+        TweetMapper tweetMapper = new TweetMapper("1", creationDate, "tweet text", new AuthorMapper("1", creationDate, "mehdi", "mehdiScreenName"));
+        tweetMappers.add(tweetMapper);
     }
 
     @AfterEach
@@ -57,20 +72,16 @@ class TwitterControllerTest {
     @Test
     @DisplayName("Find All Twitter Retrieved From H2 Database")
     void testFindAllTwitterRetrieved() {
-        List<TwitterResponseDto> twitterMessage = new ArrayList<>();
-        twitterMessage.add(new TwitterResponseDto(1l, "mehdi", new Date(), "mehdi", 1l, "mehdi najafian", new Date()));
-        twitterMessage.add(new TwitterResponseDto(2l, "mehdi2", new Date(), "mehdi2", 2l, "mehdi najafian", new Date()));
-        Mockito.when(twitterService.findAllTwitterRetrieved()).thenReturn(twitterMessage);
+        dbService.saveTwitterMessage(tweetMappers);
         List<TwitterResponseDto> allPreservedTwitters = twitterController.getAllPreservedTwitters();
-        assertTrue("it is retrieved tweets correctly", allPreservedTwitters.size() == 2);
+        assertTrue("it is retrieved tweets correctly", allPreservedTwitters.size() == 1);
     }
 
     @Test
     @DisplayName("Generate URI for PinID Method")
     void testGeneratePinUriFromKeys() throws TwitterAuthenticationException {
-        Mockito.when(twitterService.generatePinUriFromKeys(consumerKey, consumerSecret)).thenReturn("twitterUrl");
         String pinUri = twitterController.generatePinUriFromKeys(consumerKey, consumerSecret);
-        assertTrue("url is valid!", pinUri.contains("twitter"));
+        assertTrue("the twitter url for PinID is correctly created", pinUri.contains("api.twitter.com"));
     }
 
     @Test
@@ -78,7 +89,7 @@ class TwitterControllerTest {
     void testRetrieveListFromTwitterAndSave() throws TwitterAuthenticationException {
         TwitterRequestDto twitterRequestDto = new TwitterRequestDto(appName, "", consumerKey, consumerSecret, "bieber");
         Mockito.when(twitterService.retrieveAndSaveToDatabase(twitterRequestDto)).thenReturn(100);
-        int numberOfTweets = twitterController.retrieveListFromTwitterAndSave(twitterRequestDto);
+        int numberOfTweets = injectedTwitterController.retrieveListFromTwitterAndSave(twitterRequestDto);
         assertEquals("number Of Tweets are!", 100, numberOfTweets);
     }
 }

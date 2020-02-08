@@ -38,7 +38,9 @@ public class TwitterUtils {
 
 
     @Autowired
-    public TwitterUtils(TwitterAuthenticatorUtils twitterAuthenticatorUtils, TwitterDBService messageService, SimpleDateFormat simpleDateFormat, TwitterMessageRepository twitterMessageRepository) {
+    public TwitterUtils(TwitterAuthenticatorUtils twitterAuthenticatorUtils,
+                        TwitterDBService messageService,
+                        SimpleDateFormat simpleDateFormat) {
         this.twitterAuthenticatorUtils = twitterAuthenticatorUtils;
         this.twitterDBService = messageService;
         this.simpleDateFormat = simpleDateFormat;

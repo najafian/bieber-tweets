@@ -20,17 +20,14 @@ class TwitterMessage : Comparable<TwitterMessage> {
     @JoinColumn(name = "USER_ID", referencedColumnName = "USER_ID", unique = false)
     var author: Author? = null
 
+    //this constructor is for Jpa
+    constructor()
+
     constructor(messageId: Long?, creationDate: Date?, messageText: String?, author: Author?) {
         this.messageId = messageId
         this.creationDate = creationDate
         this.messageText = messageText
         this.author = author
-    }
-
-    constructor()
-
-    override fun toString(): String {
-        return "TwitterMessage(messageId=$messageId, creationDate=$creationDate, messageText=$messageText, author=$author)"
     }
 
     override fun compareTo(other: TwitterMessage): Int {

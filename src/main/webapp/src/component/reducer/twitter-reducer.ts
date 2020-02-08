@@ -12,7 +12,7 @@ export const ACTION_TYPES = {
 
 const initialState = {
     twitterApiUrl: '',
-    twitterApiGetAndSave: [],
+    twitterApiGetAndSave: 0,
     twitterApiGetResultFromDB: []
 };
 
