@@ -18,12 +18,54 @@ code {
     border: 1px solid gray;
     width: 600px;
     margin: 0 auto;
-  background: rgba(212,228,239,1);
-  background: -moz-linear-gradient(left, rgba(212,228,239,1) 0%, rgba(134,174,204,1) 100%);
-  background: -webkit-gradient(left top, right top, color-stop(0%, rgba(212,228,239,1)), color-stop(100%, rgba(134,174,204,1)));
-  background: -webkit-linear-gradient(left, rgba(212,228,239,1) 0%, rgba(134,174,204,1) 100%);
-  background: -o-linear-gradient(left, rgba(212,228,239,1) 0%, rgba(134,174,204,1) 100%);
-  background: -ms-linear-gradient(left, rgba(212,228,239,1) 0%, rgba(134,174,204,1) 100%);
-  background: linear-gradient(to right, rgba(212,228,239,1) 0%, rgba(134,174,204,1) 100%);
-  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#d4e4ef', endColorstr='#86aecc', GradientType=1 );
+    background: rgba(212, 228, 239, 1);
+    background: -moz-linear-gradient(left, rgba(212, 228, 239, 1) 0%, rgba(134, 174, 204, 1) 100%);
+    background: -webkit-gradient(left top, right top, color-stop(0%, rgba(212, 228, 239, 1)), color-stop(100%, rgba(134, 174, 204, 1)));
+    background: -webkit-linear-gradient(left, rgba(212, 228, 239, 1) 0%, rgba(134, 174, 204, 1) 100%);
+    background: -o-linear-gradient(left, rgba(212, 228, 239, 1) 0%, rgba(134, 174, 204, 1) 100%);
+    background: -ms-linear-gradient(left, rgba(212, 228, 239, 1) 0%, rgba(134, 174, 204, 1) 100%);
+    background: linear-gradient(to right, rgba(212, 228, 239, 1) 0%, rgba(134, 174, 204, 1) 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#d4e4ef', endColorstr='#86aecc', GradientType=1);
+}
+
+.loader {
+    border: 16px solid #f3f3f3;
+    border-radius: 50%;
+    border-top: 16px solid #3498db;
+    width: 120px;
+    height: 120px;
+    -webkit-animation: spin 2s linear infinite; /* Safari */
+    animation: spin 2s linear infinite;
+    margin: 150px auto 0;
+
+}
+
+/* Safari */
+@-webkit-keyframes spin {
+    0% {
+        -webkit-transform: rotate(0deg);
+    }
+    100% {
+        -webkit-transform: rotate(360deg);
+    }
+}
+
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+#loadingPanel {
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    top: 0px;
+    margin: 0 auto;
+    background-color: dimgrey;
+    opacity: 0.3;
+    visibility: hidden;
 }

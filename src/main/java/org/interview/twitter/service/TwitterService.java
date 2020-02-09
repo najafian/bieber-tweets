@@ -14,5 +14,5 @@ public interface TwitterService {
 
     String generatePinUriFromKeys(String consumerKey, String consumerSecurityKey) throws TwitterAuthenticationException;
 
-    List<TwitterResponseDto> findAllTwitterRetrieved();
+    List<TwitterResponseDto>  findAllTwitterRetrieved();
 }

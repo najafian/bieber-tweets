@@ -29,6 +29,9 @@ ReactDOM.render(
                 </div>
             </div>
             <div className="page-footer-class">This is Demo Project By Mehdi Najafian</div>
+            <div id={"loadingPanel"}>
+                <div className="loader"/>
+            </div>
         </div>
     </Provider>
     , document.getElementById('root'));

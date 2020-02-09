@@ -30,17 +30,22 @@ class TwitterInitialPage extends React.Component<ICardInstituteProps> {
 
     componentDidUpdate(prevProps: Readonly<ICardInstituteProps>, prevState: Readonly<{}>, snapshot?: any): void {
         if (this.props.twitterApiReducer.twitterApiUrl !== prevProps.twitterApiReducer.twitterApiUrl) {
+            this.showLoading();
             window.open(this.props.twitterApiReducer.twitterApiUrl);
         }
         let twitterApiGetAndSave = this.props.twitterApiReducer.twitterApiGetAndSave;
         if (twitterApiGetAndSave !== prevProps.twitterApiReducer.twitterApiGetAndSave) {
-            this.numberOfRecord = twitterApiGetAndSave;
+            let LabelContainerEl = document.getElementById('LabelContainer');
+            if (LabelContainerEl !== null)
+                LabelContainerEl.innerHTML = twitterApiGetAndSave + '';
             this.showResultBtn.disabled = false;
+            this.showLoading();
         }
         let twitterApiGetResultFromDB = this.props.twitterApiReducer.twitterApiGetResultFromDB;
         if (twitterApiGetResultFromDB !== prevProps.twitterApiReducer.twitterApiGetResultFromDB) {
             console.log(twitterApiGetResultFromDB);
             this.props.history.push('/result-page', {result: twitterApiGetResultFromDB});
+            this.showLoading();
         }
     }
 
@@ -72,6 +77,14 @@ class TwitterInitialPage extends React.Component<ICardInstituteProps> {
         });
     }
 
+    showLoading(isVisible = false) {
+        let style = 'hidden';
+        if (isVisible)
+            style = 'visible';
+        // @ts-ignore
+        document.getElementById('loadingPanel').style.visibility = style;
+    }
+
     private getDataFromTwitter() {
         this.ResultFromTwitterBtn.element.addEventListener('click', () => {
             let conKey = this.consumeKey.value;
@@ -89,6 +102,7 @@ class TwitterInitialPage extends React.Component<ICardInstituteProps> {
                     pinID: pinID
                 });
                 this.ResultFromTwitterBtn.disabled = true;
+                this.showLoading(true);
             } else
                 alert('please fill all inputs!');
         });
@@ -99,12 +113,13 @@ class TwitterInitialPage extends React.Component<ICardInstituteProps> {
             this.PinID.value = '';
             let conKey = this.consumeKey.value;
             let conSecKey = this.consumeSecurityKey.value;
-            if (conKey.length > 0 && conSecKey.length > 0)
+            if (conKey.length > 0 && conSecKey.length > 0) {
                 this.props.loadPinIDFromTwitterUri({
                     consumerKey: conKey,
                     consumerSecretKey: conSecKey
                 });
-            else
+                this.showLoading(true);
+            } else
                 alert('please fill consumerKey and consumerSecurityKey!');
         });
     }
@@ -126,7 +141,7 @@ class TwitterInitialPage extends React.Component<ICardInstituteProps> {
                     </div>
                     <div className="row topPadding">
                         <div className="col-md-5">
-                            <button style={{position: 'absolute', bottom: '0px'}} id="PinIDBtn">Get PinID From Twitter
+                            <button style={{position: 'absolute', bottom: '0px'}} id="PinIDBtn">1-Get PinID From Twitter
                             </button>
                         </div>
                         <div className="col-md-7"><input id="PinIDInput"/></div>
@@ -134,16 +149,16 @@ class TwitterInitialPage extends React.Component<ICardInstituteProps> {
                     <hr/>
                     <div className={"row topPadding"}>
                         <div className="col-md-6">
-                            <div id="saveInDBBtn">Get tweets and save into DB</div>
+                            <div id="saveInDBBtn">2-Get tweets and save into DB</div>
                         </div>
                         <div className="col-md-6"><label style={{width: '100%', fontSize: '10px'}}>A number of records
                             are saved in
-                            database: {this.numberOfRecord}</label></div>
+                            database: <label style={{width:"auto"}} id={"LabelContainer"}/></label></div>
 
                     </div>
 
                     <div className="topPadding">
-                        <button id="showResultBtn">Show Result</button>
+                        <button id="showResultBtn">3-Show Result</button>
                     </div>
 
                 </div>

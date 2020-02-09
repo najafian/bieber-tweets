@@ -56,6 +56,9 @@ public class TwitterDBService {
         return author;
     }
 
+    public void deleteAllTweets() {
+        twitterMessageRepository.deleteAll();
+    }
 
     @Transactional
     public List<TwitterMessage> findAllSortedTweets() {
