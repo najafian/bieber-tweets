@@ -14,10 +14,9 @@ data class TweetMapper(
         @JsonProperty("created_at") val creationDate: Date?,
         @JsonProperty("text") val messageText: String?,
         @JsonProperty("user") val author: AuthorMapper?
-) : Comparable<Any> {
-    override operator fun compareTo(o: Any): Int {
+) : Comparable<TweetMapper> {
+    override operator fun compareTo(oTweetMapper: TweetMapper): Int {
         var result = 0
-        val oTweetMapper = o as TweetMapper
         if (this !== oTweetMapper)
             result = this.creationDate!!.compareTo(oTweetMapper.creationDate!!)
         return result

@@ -12,7 +12,7 @@ class Author : Comparable<Author> {
     //this constructor is for Jpa
     constructor()
 
-    constructor(userId: Long?, creationDate: Date?, name: String?, screenName: String?, twitterMessage: TwitterMessage?) {
+    constructor(userId: Long?, creationDate: Date?, name: String?, screenName: String?, twitterMessage: List<TwitterMessage>?) {
         this.userId = userId
         this.creationDate = creationDate
         this.name = name
@@ -21,7 +21,7 @@ class Author : Comparable<Author> {
     }
 
     @Id
-    @Column(name = "USER_ID")
+    @Column(name = "USER_ID",unique = true)
     var userId: Long? = null
 
     @Column(name = "CREATION_DATE")
@@ -33,8 +33,8 @@ class Author : Comparable<Author> {
     @Column(name = "SCREEN_NAME")
     var screenName: String? = null
 
-    @OneToOne(mappedBy = "author")
-    var twitterMessage: TwitterMessage? = null
+    @OneToMany(mappedBy = "author")
+    var twitterMessage: List<TwitterMessage>? = null
 
     override fun compareTo(other: Author): Int {
         var result = 0

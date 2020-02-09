@@ -100,6 +100,7 @@ public class TwitterUtils {
     }
 
     private int saveTweetsIntoDatabase(BufferedReader reader) throws IOException {
+        twitterDBService.deleteAllTweets();
         long startTime = System.currentTimeMillis();
         List<TweetMapper> mapperSet = new ArrayList<>();
         ObjectMapper mapper = new ObjectMapper();

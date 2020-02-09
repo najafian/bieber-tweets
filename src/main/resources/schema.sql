@@ -2,7 +2,7 @@ SET MODE ORACLE;
 
 create table AUTHOR
 (
-    USER_ID       NUMBER not NULL primary key,
+    USER_ID       NUMBER not NULL primary KEY,
     CREATION_DATE DATE   not NULL,
     AUTHOR_NAME   VARCHAR2(255),
     SCREEN_NAME   VARCHAR2(255)

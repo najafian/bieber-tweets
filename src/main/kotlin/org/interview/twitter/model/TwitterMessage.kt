@@ -16,7 +16,7 @@ class TwitterMessage : Comparable<TwitterMessage> {
     var creationDate: Date? = null
     @Column(name = "MESSAGE_TEXT")
     var messageText: String? = null
-    @OneToOne(cascade = [CascadeType.ALL])
+    @ManyToOne(cascade = [CascadeType.ALL])
     @JoinColumn(name = "USER_ID", referencedColumnName = "USER_ID", unique = false)
     var author: Author? = null
 

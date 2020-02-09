@@ -27,7 +27,7 @@ code {
 
 
 .page-footer-class {
-    position: absolute;
+    position: fixed;
     bottom: 0px;
     width: 100%;
     background-color: #333131;
